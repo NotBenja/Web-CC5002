@@ -15,7 +15,7 @@ const frutas = [
 ];
 const verduras = [
     "Brócoli", "Repollo", "Coliflor", "Rábano", "Alcachofa", "Lechuga", "Zapallo",
-    "Pepino", "Haba", "Maíz", "Champiñón", "Acelga", "Apio", "Espinaca", "Perejil",
+    "Pepino", "Haba", "Maíz", "Champiñón", "Apio", "Perejil",
     "Ajo", "Cebolla", "Espárrago", "Puerro", "Acelga", "Espinaca", "Remolacha",
     "Berenjena", "Papa", "Pimiento", "Tomate", "Zanahoria"
 ];
