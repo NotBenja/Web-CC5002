@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agregar Producto</title>
-    <link rel="stylesheet" href="/app/css/agregar-producto.css">
-    <script src="/app/js/agregar-producto.js" defer></script>
+    <link rel="stylesheet" href="/Tarea1/app/css/agregar-producto.css">
+    <script src="/Tarea1/app/js/agregar-producto.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -13,14 +13,16 @@
         <form id="productForm">
             <label for="tipoProducto">Tipo de producto:</label>
             <select id="tipoProducto" name="tipoProducto">
+                <option value="default">Seleccionar</option>
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
 
-            <label for="producto">Producto:</label>
-            <select id="producto" name="producto" multiple>
-                <!-- Seleccionado mediante JavaScript -->
-            </select>
+            <label for="productos">Productos (selecciona entre 1 y 5):</label>
+            <div id="productos">
+              <!-- Lista de checkboxes generada dinámicamente con JavaScript -->
+            </div>
+            
 
             <label for="descripcion">Descripción:</label>
             <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea>
