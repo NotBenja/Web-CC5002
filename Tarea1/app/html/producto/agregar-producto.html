@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="/app/css/agregar-producto.css">
+    <script src="/app/js/agregar-producto.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Agregar Producto</h2>
+        <form id="productForm">
+            <label for="tipoProducto">Tipo de producto:</label>
+            <select id="tipoProducto" name="tipoProducto">
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+
+            <label for="producto">Producto:</label>
+            <select id="producto" name="producto" multiple>
+                <!-- Seleccionado mediante JavaScript -->
+            </select>
+
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="4" cols="50"></textarea>
+
+            <label for="fotos">Fotos de productos (1-3):</label>
+            <input type="file" id="fotos" name="fotos" accept="image/*" multiple>
+
+            <label for="region">Región:</label>
+            <select id="region" name="region">
+                <option value="region1">Región 1</option>
+                <option value="region2">Región 2</option>
+                <!-- Agregar más regiones según sea necesario -->
+            </select>
+
+            <label for="comuna">Comuna:</label>
+            <select id="comuna" name="comuna">
+                <!-- Seleccionado mediante JavaScript según la región -->
+            </select>
+
+            <label for="nombreProductor">Nombre Productor:</label>
+            <input type="text" id="nombreProductor" name="nombreProductor" minlength="3" maxlength="80">
+
+            <label for="emailProductor">Email Productor:</label>
+            <input type="email" id="emailProductor" name="emailProductor">
+
+            <label for="celularProductor">Número celular Productor:</label>
+            <input type="tel" id="celularProductor" name="celularProductor" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Formato: xxx-xxx-xxxx">
+
+            <button type="button" id="agregarProducto">Agregar Producto(s)</button>
+        </form>
+
+        <div class="confirmation" id="confirmationMessage">
+            <p>¿Confirma el registro de este producto?</p>
+            <button id="confirmar">Sí, confirmo</button>
+            <button id="cancelar">No, quiero volver al formulario</button>
+        </div>
+    </div>
+</body>
+</html>
