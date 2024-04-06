@@ -65,24 +65,24 @@ body {
 .navbar-page:hover::after {
     transform: scale(1, 1);
 }
-.products-table table, th, tr, td {
+.order-table table, th, tr, td {
     margin: 0 auto;
     border-collapse: collapse;
     border: 1px solid;
     width: 90%;
     padding: 15px;
 }
-.products-table tr:hover{
+.order-table tr:hover{
     background-color: #D6EEEE;
 }
-.products-table img {
+.order-table img {
     width: 120px; 
     height: 120px; 
     display: block;
     margin: 0 auto;
     object-fit: cover; 
 }
-.products-table{
+.order-table{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;

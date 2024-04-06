@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrutiVerde Express</title>
+    <link rel="stylesheet" href="../../css/agregar-pedido.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <img id="logo-id" src="../../fruit-basket-icon.svg" alt="Logo"/>
+        <h1>FrutiVerde Online</h1>
+        <a class="navbar-page" href="../index.html">Inicio</a>
+    </div>
+    <div class="container">
+        <h2>Agregar Pedido</h2>
+        <form id="productForm">
+
+
+            <label for="tipoProducto1">Producto 1:</label>
+            <select id="tipoProducto1" name="tipoProducto">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+        
+            <label for="tipoProducto2">Producto 2:</label>
+            <select id="tipoProducto2" name="tipoProducto">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+        
+            <label for="tipoProducto3">Producto 3:</label>
+            <select id="tipoProducto3" name="tipoProducto">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+        
+            <label for="tipoProducto4">Producto 4:</label>
+            <select id="tipoProducto4" name="tipoProducto">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+        
+            <label for="tipoProducto5">Producto 5:</label>
+            <select id="tipoProducto5" name="tipoProducto">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <label for="descripcion">Descripción:</label>
+            <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
+
+            <label for="region">Región:</label>
+            <select id="region" name="region">
+                <option value="none">Seleccionar</option>
+            </select>
+
+            <label for="comuna">Comuna:</label>
+            <select id="comuna" name="comuna">
+                <option value="none">Seleccionar</option>
+            </select>
+
+            <label for="nombreComprador">Nombre Comprador:</label>
+            <input type="text" id="nombreComprador" name="nombreComprador" minlength="3" maxlength="80" placeholder="Ej: Juan Pérez">
+
+            <label for="emailComprador">Email Comprador:</label>
+            <input type="email" id="emailComprador" name="emailComprador" placeholder="Ej: tucorreo@dominio.com">
+
+            <label for="celularComprador">Número celular Comprador:</label>
+            <input type="tel" id="celularComprador" name="celularComprador" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Formato: +569XXXXXXXX">
+
+            <button type="button" id="agregarProducto">Agregar Pedido</button>
+        </form>
+
+        <div class="confirmation" id="confirmationMessage">
+            <p>¿Confirma el registro de este pedido?</p>
+            <button id="confirmar">Sí, confirmo</button>
+            <button id="cancelar">No, quiero volver al formulario</button>
+        </div>
+    </div>
+</body>
+</html>

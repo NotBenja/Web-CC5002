@@ -1,6 +1,7 @@
 :root {
     --black-color: #000022;
     --background-color: #E8E6F0;
+    --pink-color: #FC2865;
 }
 
 body {
@@ -10,6 +11,17 @@ body {
     background-color: #e8ddc9;
 }
 
+.input-container {
+    margin-bottom: 5px;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 .navbar {
     display: flex;
     flex-flow: row wrap;
@@ -51,6 +63,24 @@ body {
     font-weight: 600;
     font-size: 1rem;
 }
+
+#logout-btn {
+    background-color: var(--pink-color);
+    width: 5%;
+    text-align: center;
+    padding: .5em;
+    border: .2em solid var(--black-color);
+    box-shadow: .175em .175em 0px 0px black;
+    border-radius: .3em;
+}
+
+#logout-btn:hover {
+    background-color: #fb5685;
+    color: white;
+    transition: 0.2s ease;
+}
+
+
 .navbar-page::after{
     content: "";
     position: absolute;
@@ -62,31 +92,56 @@ body {
     transform: scale(0, 1);
     transition: transform 0.3s ease;
 }
+
+
 .navbar-page:hover::after {
     transform: scale(1, 1);
 }
-.products-table table, th, tr, td {
-    margin: 0 auto;
-    border-collapse: collapse;
-    border: 1px solid;
-    width: 90%;
-    padding: 15px;
+
+form {
+    margin-top: 20px;
 }
-.products-table tr:hover{
-    background-color: #D6EEEE;
-}
-.products-table img {
-    width: 120px; 
-    height: 120px; 
+
+label {
     display: block;
-    margin: 0 auto;
-    object-fit: cover; 
+    margin-bottom: 5px;
 }
-.products-table{
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.confirmation {
+    display: none;
+    margin-top: 20px;
+}
+
+.confirmation button {
+    margin-right: 10px;
 }

@@ -61,19 +61,40 @@ body {
     font-weight: 600;
     font-size: 1rem;
 }
+.navbar a {
+    position: relative;
+    text-decoration: none;
+    margin: 0 2em;
+    padding: .25em;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.navbar-page::after{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 0.175em;
+    background: var(--black-color);
+    left: 0;
+    bottom: 0;
+    transform: scale(0, 1);
+    transition: transform 0.3s ease;
+}
+.navbar-page:hover::after {
+    transform: scale(1, 1);
+}
 .container table, th, tr, td {
     margin: 0 auto;
     border-collapse: collapse;
     border: 1px solid;
-    width: 90%;
-    padding: 15px;
+    width: 100%;
 }
-.container img {
+
+#fotoProducto {
     width: 640px; 
     height: 480px; 
     display: block;
     margin: 0 auto;
-    object-fit: cover; 
 }
 .container{
     max-width: 800px;

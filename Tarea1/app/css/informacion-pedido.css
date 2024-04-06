@@ -1,6 +1,7 @@
 :root {
     --black-color: #000022;
     --background-color: #E8E6F0;
+    --pink-color: #FC2865;
 }
 
 body {
@@ -10,12 +11,20 @@ body {
     background-color: #e8ddc9;
 }
 
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 .navbar {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-end;
     align-items: center;
-    background: rgb(140, 195, 39);;
+    background: rgb(140, 195, 39);
     border: .2em solid var(--black-color);
     border-radius: .25em;
     margin: 1em 1em 2em 1em;
@@ -43,6 +52,15 @@ body {
     margin-right: auto;
 }
 
+
+.navbar a {
+    position: relative;
+    text-decoration: none;
+    margin: 0 2em;
+    padding: .25em;
+    font-weight: 600;
+    font-size: 1rem;
+}
 .navbar a {
     position: relative;
     text-decoration: none;
@@ -65,24 +83,14 @@ body {
 .navbar-page:hover::after {
     transform: scale(1, 1);
 }
-.products-table table, th, tr, td {
+.container table, th, tr, td {
     margin: 0 auto;
     border-collapse: collapse;
     border: 1px solid;
-    width: 90%;
-    padding: 15px;
+    width: 100%;
 }
-.products-table tr:hover{
-    background-color: #D6EEEE;
-}
-.products-table img {
-    width: 120px; 
-    height: 120px; 
-    display: block;
-    margin: 0 auto;
-    object-fit: cover; 
-}
-.products-table{
+
+.container{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
