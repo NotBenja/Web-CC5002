@@ -1,0 +1,85 @@
+:root {
+    --black-color: #000022;
+    --background-color: #E8E6F0;
+    --pink-color: #FC2865;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8ddc9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.navbar {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    align-items: center;
+    background: rgb(140, 195, 39);
+    border: .2em solid var(--black-color);
+    border-radius: .25em;
+    margin: 1em 1em 2em 1em;
+    box-shadow: .3em .3em 0px 0px black;
+}
+
+.navbar > * {
+    color: var(--black-color);
+    font-family: "Roboto", sans-serif;
+}
+
+#logo-id {
+    margin: 0 auto;
+    width: 2%;
+    padding: .5em;
+    border: .2em solid var(--black-color);
+    margin: .1em .25em .1em 1.5em;
+    box-shadow: .15em .15em 0px 0px black;
+    border-radius: .25em;
+}
+
+.navbar h1 {
+    font-family: "Fira Code", monospace;
+    margin: .5em;
+    margin-right: auto;
+}
+
+
+.navbar a {
+    position: relative;
+    text-decoration: none;
+    margin: 0 2em;
+    padding: .25em;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.container table, th, tr, td {
+    margin: 0 auto;
+    border-collapse: collapse;
+    border: 1px solid;
+    width: 90%;
+    padding: 15px;
+}
+.container img {
+    width: 640px; 
+    height: 480px; 
+    display: block;
+    margin: 0 auto;
+    object-fit: cover; 
+}
+.container{
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
