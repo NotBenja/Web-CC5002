@@ -3,9 +3,9 @@ let size = 0;
 fotoProducto.addEventListener("click", function(){
     if(size==1){
         size = 0
-        fotoProducto.src = "../../media/big/manzana_big.jpg"
+        fotoProducto.src = "../../media/medium/manzana_medium.png"
     }else if(size == 0){
         size = 1
-        fotoProducto.src = "../../media/medium/manzana_medium.jpg"
+        fotoProducto.src = "../../media/big/manzana_big.png"
     }
 })
