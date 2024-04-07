@@ -91,10 +91,9 @@ body {
 }
 
 #fotoProducto {
-    width: 640px; 
-    height: 480px; 
     display: block;
     margin: 0 auto;
+    cursor: pointer;
 }
 .container{
     max-width: 800px;

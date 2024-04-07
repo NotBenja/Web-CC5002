@@ -75,6 +75,9 @@ body {
 .order-table tr:hover{
     background-color: #D6EEEE;
 }
+.order-table td{
+    cursor: pointer;
+}
 .order-table img {
     width: 120px; 
     height: 120px; 

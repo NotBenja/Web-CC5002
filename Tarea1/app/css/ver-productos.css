@@ -75,6 +75,9 @@ body {
 .products-table tr:hover{
     background-color: #D6EEEE;
 }
+.products-table td{
+    cursor: pointer;
+}
 .products-table img {
     width: 120px; 
     height: 120px; 
