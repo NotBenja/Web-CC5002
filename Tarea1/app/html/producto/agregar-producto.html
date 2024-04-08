@@ -24,6 +24,8 @@
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
+            <div id="contenedor1"></div>
+
             
             <label for="tipoProducto2">Producto 2:</label>
             <select class="tipoProducto" name="tipoProducto">
@@ -31,6 +33,7 @@
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
+            <div id="contenedor2"></div>
             
             <label for="tipoProducto3">Producto 3:</label>
             <select class="tipoProducto" name="tipoProducto">
@@ -38,6 +41,7 @@
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
+            <div id="contenedor3"></div>
             
             <label for="tipoProducto4">Producto 4:</label>
             <select class="tipoProducto" name="tipoProducto">
@@ -45,6 +49,7 @@
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
+            <div id="contenedor4"></div>
             
             <label for="tipoProducto5">Producto 5:</label>
             <select class="tipoProducto" name="tipoProducto">
@@ -52,6 +57,7 @@
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
+            <div id="contenedor5"></div>
     
             <label for="descripcion">Descripción:</label>
             <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
@@ -94,11 +100,11 @@
             <button type="button" id="agregarProducto">Agregar Producto(s)</button>
         </form>
 
-        <div class="confirmation" id="confirmationMessage">
+        <div class="confirmation" id="confirmationMessage" style="display: none;">
             <p>¿Confirma el registro de este producto?</p>
             <button id="confirmar">Sí, confirmo</button>
             <button id="cancelar">No, quiero volver al formulario</button>
-        </div>
+          </div>
     </div>
 </body>
 </html>
