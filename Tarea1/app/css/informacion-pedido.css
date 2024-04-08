@@ -83,11 +83,34 @@ body {
 .navbar-page:hover::after {
     transform: scale(1, 1);
 }
-.container table, th, tr, td {
-    margin: 0 auto;
-    border-collapse: collapse;
-    border: 1px solid;
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.container table {
     width: 100%;
+    border-collapse: collapse;
+}
+
+.container th, 
+.container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.container th {
+    background-color: #a1cc84;
+}
+
+.container tr:hover {
+    background-color: #f5f5f5;
 }
 
 .container{

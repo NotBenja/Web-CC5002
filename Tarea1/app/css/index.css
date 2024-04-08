@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
     background-color: #e8ddc9;
@@ -53,23 +53,6 @@ body {
     font-size: 1rem;
 }
 
-#logout-btn {
-    background-color: var(--pink-color);
-    width: 5%;
-    text-align: center;
-    padding: .5em;
-    border: .2em solid var(--black-color);
-    box-shadow: .175em .175em 0px 0px black;
-    border-radius: .3em;
-}
-
-#logout-btn:hover {
-    background-color: #fb5685;
-    color: white;
-    transition: 0.2s ease;
-}
-
-
 .navbar-page::after{
     content: "";
     position: absolute;
@@ -82,7 +65,6 @@ body {
     transition: transform 0.3s ease;
 }
 
-
 .navbar-page:hover::after {
     transform: scale(1, 1);
 }
@@ -93,6 +75,10 @@ body {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container h1{
+    font-family: "Fira Code", monospace;
 }
 
 ul.menu {
@@ -107,9 +93,10 @@ ul.menu li {
 }
 
 ul.menu li a {
+    font-family: sans-serif;
     padding: 10px 20px;
     background-color: #4CAF50;
-    color: rgb(88, 86, 86);
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 10px;
     cursor: pointer;

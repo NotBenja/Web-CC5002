@@ -65,31 +65,47 @@ body {
 .navbar-page:hover::after {
     transform: scale(1, 1);
 }
-.products-table table, th, tr, td {
-    margin: 0 auto;
+.products-table {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.products-table table {
+    width: 100%;
     border-collapse: collapse;
-    border: 1px solid;
-    width: 90%;
-    padding: 15px;
 }
-.products-table tr:hover{
-    background-color: #D6EEEE;
+
+.products-table th, 
+.products-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
-.products-table td{
-    cursor: pointer;
+
+.products-table th {
+    background-color: #a1cc84;
 }
+
+.products-table tr:hover {
+    background-color: #f5f5f5;
+}
+
 .products-table img {
     width: 120px; 
     height: 120px; 
     display: block;
     margin: 0 auto;
-    object-fit: cover; 
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-.products-table{
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+.products-table td {
+    cursor: pointer;
 }
+

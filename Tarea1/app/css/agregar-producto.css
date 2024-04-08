@@ -64,23 +64,6 @@ body {
     font-size: 1rem;
 }
 
-#logout-btn {
-    background-color: var(--pink-color);
-    width: 5%;
-    text-align: center;
-    padding: .5em;
-    border: .2em solid var(--black-color);
-    box-shadow: .175em .175em 0px 0px black;
-    border-radius: .3em;
-}
-
-#logout-btn:hover {
-    background-color: #fb5685;
-    color: white;
-    transition: 0.2s ease;
-}
-
-
 .navbar-page::after{
     content: "";
     position: absolute;
@@ -92,7 +75,6 @@ body {
     transform: scale(0, 1);
     transition: transform 0.3s ease;
 }
-
 
 .navbar-page:hover::after {
     transform: scale(1, 1);
@@ -115,7 +97,7 @@ textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #d6e691;
     border-radius: 5px;
     box-sizing: border-box;
 }
