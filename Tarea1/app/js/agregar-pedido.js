@@ -86,11 +86,10 @@ const tipoProductos = document.querySelectorAll('.tipoProducto');
 const producto = document.getElementById("producto");
 const region = document.getElementById("region");
 const comuna = document.getElementById("comuna");
-const fotos = document.querySelectorAll('input[type="file"]');
-const nombre = document.getElementById("nombreProductor");
-const email = document.getElementById("emailProductor");
-const numero = document.getElementById("celularProductor");
-const agregarProductoBtn = document.getElementById("agregarProducto");
+const nombre = document.getElementById("nombreComprador");
+const email = document.getElementById("emailComprador");
+const numero = document.getElementById("celularComprador");
+const agregarPedidoBtn = document.getElementById("agregarPedido");
 const confirmationMessage = document.getElementById("confirmationMessage");
 const confirmarBtn = document.getElementById("confirmar");
 const cancelarBtn = document.getElementById("cancelar");
@@ -178,21 +177,6 @@ const validarTipo = (tipoProductos) => {
   return conteoTiposValidos > 0;
 };
 
-const validarFotos = (fotos) => {
-  let conteoFotos = 0;
-  const tiposValidos = ["image/jpeg", "image/png", "image/gif","image/jpg"];
-  fotos.forEach(function(input) {
-    if (input.files.length > 0) {
-      const archivo = input.files[0];
-      if (tiposValidos.includes(archivo.type)) {
-        conteoFotos++;
-      } else {return false}
-    }
-  });
-  return conteoFotos > 0;
-};
-
-
 const validarRegion_Comuna = (region, comuna) => {
   const selectedRegionData = regiones_comunas.regiones.find((n_region) => n_region.region === region);
   if (selectedRegionData) {
@@ -240,10 +224,6 @@ const handleFormSubmit = () => {
     });
   }
 
-  if (!validarFotos(fotos)) {
-    isValid = false;
-    errorMessage += "Por favor, revisa si tus archivos son imágenes. Debe ser al menos una.\n";
-  }
 
   if (!validarRegion_Comuna(region.value, comuna.value)) {
     isValid = false;
@@ -287,12 +267,12 @@ const handleFormSubmit = () => {
   }
 };
 
-document.getElementById('agregarProducto').addEventListener('click', () => {
+document.getElementById('agregarPedido').addEventListener('click', () => {
   handleFormSubmit();
 });
 
 document.getElementById('confirmar').addEventListener('click', () => {
-  alert('Hemos recibido el registro de producto. ¡Muchas gracias!');
+  alert('Hemos recibido el registro de su pedido. ¡Muchas gracias!');
   window.location.href = "../index.html";
 });
 

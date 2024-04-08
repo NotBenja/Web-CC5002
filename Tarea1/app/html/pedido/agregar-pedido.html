@@ -6,6 +6,7 @@
     <title>FrutiVerde Express</title>
     <link rel="stylesheet" href="../../css/agregar-pedido.css">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap" rel="stylesheet">
+    <script src="../../js/agregar-pedido.js" defer></script>
 </head>
 <body>
     <div class="navbar">
@@ -15,46 +16,52 @@
     </div>
     <div class="container">
         <h2>Agregar Pedido</h2>
-        <form id="productForm">
-
+        <form id="orderForm">
 
             <label for="tipoProducto1">Producto 1:</label>
-            <select id="tipoProducto1" name="tipoProducto">
+            <select class="tipoProducto" name="tipoProducto">
                 <option value="none">Ninguno</option>
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
-        
+            <div id="contenedor1"></div>
+
+            
             <label for="tipoProducto2">Producto 2:</label>
-            <select id="tipoProducto2" name="tipoProducto">
+            <select class="tipoProducto" name="tipoProducto">
                 <option value="none">Ninguno</option>
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
-        
+            <div id="contenedor2"></div>
+            
             <label for="tipoProducto3">Producto 3:</label>
-            <select id="tipoProducto3" name="tipoProducto">
+            <select class="tipoProducto" name="tipoProducto">
                 <option value="none">Ninguno</option>
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
-        
+            <div id="contenedor3"></div>
+            
             <label for="tipoProducto4">Producto 4:</label>
-            <select id="tipoProducto4" name="tipoProducto">
+            <select class="tipoProducto" name="tipoProducto">
                 <option value="none">Ninguno</option>
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
-        
+            <div id="contenedor4"></div>
+            
             <label for="tipoProducto5">Producto 5:</label>
-            <select id="tipoProducto5" name="tipoProducto">
+            <select class="tipoProducto" name="tipoProducto">
                 <option value="none">Ninguno</option>
                 <option value="fruta">Fruta</option>
                 <option value="verdura">Verdura</option>
             </select>
+            <div id="contenedor5"></div>
+    
             <label for="descripcion">Descripción:</label>
             <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
-
+            
             <label for="region">Región:</label>
             <select id="region" name="region">
                 <option value="none">Seleccionar</option>
@@ -72,16 +79,16 @@
             <input type="email" id="emailComprador" name="emailComprador" placeholder="Ej: tucorreo@dominio.com">
 
             <label for="celularComprador">Número celular Comprador:</label>
-            <input type="tel" id="celularComprador" name="celularComprador" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Formato: +569XXXXXXXX">
+            <input type="tel" id="celularComprador" name="celularComprador" placeholder="Formato: +569XXXXXXXX">
 
-            <button type="button" id="agregarProducto">Agregar Pedido</button>
+            <button type="button" id="agregarPedido">Agregar Pedido</button>
         </form>
 
-        <div class="confirmation" id="confirmationMessage">
+        <div class="confirmation" id="confirmationMessage" style="display: none;">
             <p>¿Confirma el registro de este pedido?</p>
             <button id="confirmar">Sí, confirmo</button>
             <button id="cancelar">No, quiero volver al formulario</button>
-        </div>
+          </div>
     </div>
 </body>
 </html>
