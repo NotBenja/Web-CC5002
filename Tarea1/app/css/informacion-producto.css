@@ -70,7 +70,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: fit-content;
     margin: 50px auto;
     padding: 20px;
     background-color: #ffffff;
