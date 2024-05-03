@@ -154,6 +154,10 @@ CREATE TABLE IF NOT EXISTS `tarea2`.`pedido_verdura_fruta` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- Create user 'cc5002' and grant privileges
+CREATE USER 'cc5002'@'%' IDENTIFIED BY 'programacionweb';
+GRANT ALL PRIVILEGES ON tarea2.* TO 'cc5002'@'%';
+FLUSH PRIVILEGES;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
