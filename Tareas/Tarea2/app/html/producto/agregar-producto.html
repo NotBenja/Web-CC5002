@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FrutiVerde Express</title>
+    <link rel="stylesheet" href="../../css/agregar-producto.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap" rel="stylesheet">
+    <script src="../../js/agregar-producto.js" defer></script>
+</head>
+<body>
+    <div class="navbar">
+        <img id="logo-id" src="../../fruit-basket-icon.svg" alt="Logo">
+        <h1>FrutiVerde Online</h1>
+        <a class="navbar-page" href="../index.html">Inicio</a>
+    </div>
+    <div class="container">
+        <h2>Agregar Producto</h2>
+        <form id="productForm">
+
+            <label for="tipoProducto1">Producto 1:</label>
+            <select class="tipoProducto" id="tipoProducto1" name="tipoProducto1">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor1"></div>
+
+            
+            <label for="tipoProducto2">Producto 2:</label>
+            <select class="tipoProducto" id="tipoProducto2" name="tipoProducto2">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor2"></div>
+            
+            <label for="tipoProducto3">Producto 3:</label>
+            <select class="tipoProducto" id="tipoProducto3" name="tipoProducto3">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor3"></div>
+            
+            <label for="tipoProducto4">Producto 4:</label>
+            <select class="tipoProducto" id="tipoProducto4" name="tipoProducto4">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor4"></div>
+            
+            <label for="tipoProducto5">Producto 5:</label>
+            <select class="tipoProducto" id="tipoProducto5" name="tipoProducto5">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor5"></div>
+    
+            <label for="descripcion">Descripción:</label>
+            <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
+        
+            <label for="foto1">Foto 1:</label>
+            <div class="input-container">
+                <input type="file" id="foto1" name="foto1" accept="image/*">
+            </div>
+            
+            <label for="foto2">Foto 2:</label>
+            <div class="input-container">
+                <input type="file" id="foto2" name="foto2" accept="image/*">
+            </div>
+            
+            <label for="foto3">Foto 3:</label>
+            <div class="input-container">
+                <input type="file" id="foto3" name="foto3" accept="image/*">
+            </div>
+            
+
+            <label for="region">Región:</label>
+            <select id="region" name="region">
+                <option value="none">Seleccionar</option>
+            </select>
+
+            <label for="comuna">Comuna:</label>
+            <select id="comuna" name="comuna">
+                <option value="none">Seleccionar</option>
+            </select>
+
+            <label for="nombreProductor">Nombre Productor:</label>
+            <input type="text" id="nombreProductor" name="nombreProductor" minlength="3" maxlength="80" placeholder="Ej: Juan Pérez">
+
+            <label for="emailProductor">Email Productor:</label>
+            <input type="email" id="emailProductor" name="emailProductor" placeholder="Ej: tucorreo@dominio.com">
+
+            <label for="celularProductor">Número celular Productor:</label>
+            <input type="tel" id="celularProductor" name="celularProductor" placeholder="Formato: +569XXXXXXXX">
+
+            <button type="button" id="agregarProducto">Agregar Producto(s)</button>
+        </form>
+
+        <div class="confirmation" id="confirmationMessage" style="display: none;">
+            <p>¿Confirma el registro de este producto?</p>
+            <button id="confirmar">Sí, confirmo</button>
+            <button id="cancelar">No, quiero volver al formulario</button>
+          </div>
+    </div>
+</body>
+</html>
