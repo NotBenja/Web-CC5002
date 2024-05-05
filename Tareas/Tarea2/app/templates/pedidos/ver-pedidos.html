@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>FrutiVerde Online</title>
-        <link rel="stylesheet" type="text/css" href="../../css/ver-pedidos.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="navbar">
-            <img id="logo-id" src="../../fruit-basket-icon.svg" alt="Logo">
-            <h1>FrutiVerde Online</h1>
-            <a class="navbar-page" href="../index.html">Inicio</a>
-        </div>
+{%extends 'base.html'%}
+{% block css %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
+{% endblock %}
+{% block content %}
         <div class="order-table">
             <table id="tablaPedidos">
                 <tr>
@@ -40,13 +28,15 @@
                 </tr>
                 <tr>
                     <td> Fruta, Verdura </td>
-                    <td> Lechuga, Rábano, Alcachofa, Pomelo, Cereza</td>                    <td> Región Metropolitana </td>
+                    <td> Lechuga, Rábano, Alcachofa, Pomelo, Cereza</td>                    
+                    <td> Región Metropolitana </td>
                     <td> Santiago Centro </td>
                     <td> Jorge San Martín </td>
                 </tr>
                 <tr>
                     <td> Fruta </td>
-                    <td> Papaya, Uva, Pistacho, Nuez</td>                    <td> Región Metropolitana </td>
+                    <td> Papaya, Uva, Pistacho, Nuez</td>                    
+                    <td> Región Metropolitana </td>
                     <td> Recoleta </td>
                     <td> Luis Castillo </td>
                 </tr>
@@ -59,6 +49,7 @@
                 </tr>
             </table>
         </div>
-    <script src="../../js/ver-pedidos.js"></script>
-    </body>
-</html>
+{% endblock content %}
+{% block javascript %}
+    <script src="{{ url_for('static', filename='js/ver-pedidos.js') }}"></script>
+{% endblock %}

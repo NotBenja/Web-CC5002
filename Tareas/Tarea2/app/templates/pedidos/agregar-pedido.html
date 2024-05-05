@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FrutiVerde Express</title>
-    <link rel="stylesheet" href="../../css/agregar-pedido.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap" rel="stylesheet">
-    <script src="../../js/agregar-pedido.js" defer></script>
-</head>
-<body>
-    <div class="navbar">
-        <img id="logo-id" src="../../fruit-basket-icon.svg" alt="Logo">
-        <h1>FrutiVerde Online</h1>
-        <a class="navbar-page" href="../index.html">Inicio</a>
-    </div>
+{%extends 'base.html'%}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/agregar-pedido.css') }}">
+{% endblock %}
+{% block content %}
     <div class="container">
         <h2>Agregar Pedido</h2>
         <form id="orderForm">
@@ -90,5 +79,7 @@
             <button id="cancelar">No, quiero volver al formulario</button>
           </div>
     </div>
-</body>
-</html>
+{% endblock %}
+{% block javascript %}
+    <script src="{{ url_for('static', filename='js/agregar-pedido.js') }}"></script>
+{% endblock %}

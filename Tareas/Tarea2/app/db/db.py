@@ -62,6 +62,13 @@ def get_tipos_producto(producto_id):
 	return tipos
 
 def get_fotos_producto(producto_id):
+	"""
+    Retorna la ruta del archivo de la foto y el nombre del archivo con el id entregado.
+    
+    :param a: Primer número
+    :param b: Segundo número
+    :return: Suma de a y b
+    """
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_fotos_producto"], (producto_id,))
@@ -97,7 +104,7 @@ def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
 
 	
 #Definimos funciones para registrar productos en la db
-def registrar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor):
+def registrar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor, fotos):
 	#Verificamos si el producto ya existe
 	existing_products = get_productos_recientes()
 	for product in existing_products:
@@ -113,5 +120,5 @@ def registrar_producto(tipo, descripcion, comuna_id, nombre_productor, email_pro
 	
 	return True, None
 
-#def registrar_foto(ruta_archivo, nombre_archivo, producto_id):
-
+#def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
+# Esta función quiero que construyas

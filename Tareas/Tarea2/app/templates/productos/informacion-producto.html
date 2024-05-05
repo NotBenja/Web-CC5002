@@ -1,22 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> FrutiVerde Online</title>
-    <link rel="stylesheet" href="../../css/informacion-producto.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Roboto&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="navbar">
-        <img id="logo-id" src="../../fruit-basket-icon.svg" alt="Logo">
-        <h1>FrutiVerde Online</h1>
-        <a class="navbar-page" href="../index.html">Inicio</a>
-        <a class="navbar-page" href="../producto/ver-productos.html">Volver al listado</a>
-
-    </div>
+{%extends 'base.html'%}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion-producto.css') }}">
+{% endblock %}
+{% block content %}
     <div class="container">
         <h1>Información Producto</h1>
         <table>
@@ -35,6 +21,8 @@
         </table>
         <div> <img id="fotoProducto" src="../../media/medium/manzana_medium.png" alt="Foto Producto"> </div>
         </div>
-<script src="../../js/informacion-producto.js"></script>
-</body>
-</html>
+{% endblock content %}
+<script src="{{ url_for('static', filename='js/informacion-producto.js') }}"></script>
+{% block javascript %}{% endblock %}
+
+
