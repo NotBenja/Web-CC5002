@@ -273,7 +273,7 @@ document.getElementById('agregarPedido').addEventListener('click', () => {
 
 document.getElementById('confirmar').addEventListener('click', () => {
   alert('Hemos recibido el registro de su pedido. ¡Muchas gracias!');
-  window.location.href = "../index.html";
+  document.getElementById('orderForm').submit();
 });
 
 document.getElementById('cancelar').addEventListener('click', () => {
