@@ -1,7 +1,7 @@
 import pymysql
 import json
 
-DB_NAME = "frutiverde_db"
+DB_NAME = "tarea2"
 DB_USERNAME = "cc5002"
 DB_PASSWORD = "programacionweb"
 DB_HOST = "localhost"
@@ -96,85 +96,22 @@ def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
 
 
 	
-
-# -- db-related functions --
+#Definimos funciones para registrar productos en la db
 def registrar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor):
-	# 1. Check if the product already exists
+	#Verificamos si el producto ya existe
 	existing_products = get_productos_recientes()
 	for product in existing_products:
 		if product[0] == tipo and product[1] == descripcion and product[2] == comuna_id:
 			return False, "El producto ya existe."
 	
-	# 2. Insert the product into the database
+	#En caso de no existir, lo agregamos
 	insertar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor)
 	
-	# 3. Get the last inserted product ID
+	#Obtenemos el id del producto para insertarlo en las demás tablas
 	producto_id = get_ultimo_id_insertado()
-	
-	# 4. Insert the product type into the database
-	insertar_producto_verdura_tipo(producto_id, tipo_verdura_fruta_id)
-	
-	# 5. Insert the product photo into the database
-	insertar_foto(ruta_archivo, nombre_archivo, producto_id)
+	insertar_producto_verdura_tipo(producto_id, tipo)
 	
 	return True, None
 
-
-
-
-
-def get_user_by_email(email):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_user_by_email"], (email,))
-	user = cursor.fetchone()
-	return user
-
-def get_user_by_username(username):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_user_by_username"], (username,))
-	user = cursor.fetchone()
-	return user
-
-def create_user(username, password, email):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["create_user"], (username, password, email))
-	conn.commit()
-
-def get_confessions(page_size):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["get_confessions"], (page_size,))
-	confessions = cursor.fetchall()
-	return confessions
-
-def create_confession(conf_text, conf_img, user_id):
-	conn = get_conn()
-	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["create_confession"], (conf_text, conf_img, user_id))
-	conn.commit()
-def register_user(username, password, email):
-	# 1. check the email is not in use
-	_email_user = get_user_by_email(email)
-	if _email_user is not None:
-		return False, "El correo ya esta en uso."
-	# 2. check the username is not in use
-	_username_user = get_user_by_username(username)
-	if _username_user is not None:
-		return False, "El nombre de usuario esta en uso."
-	# 3. create user
-	create_user(username, password, email)
-	return True, None
-
-def login_user(username, password):
-	a_user = get_user_by_username(username)
-	if a_user is None:
-		return False, "Usuario o contraseña incorrectos."
-
-	a_user_passwd = a_user[3]
-	if a_user_passwd != password:
-		return False, "Usuario o contraseña incorrectos."
-	return True, None
+#def registrar_foto(ruta_archivo, nombre_archivo, producto_id):
 
