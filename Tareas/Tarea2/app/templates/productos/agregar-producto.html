@@ -1,4 +1,4 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/agregar-producto.css') }}">
@@ -6,69 +6,29 @@
 
 {% block content %}
     <div class="container">
-        <h2>Agregar Producto</h2>
-        <form id="productForm" action="{{url_for('agregar_producto')}}" method="post" >
-
-            <label for="tipoProducto1">Producto 1:</label>
-            <select class="tipoProducto" id="tipoProducto1" name="tipoProducto1">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor1"></div>
-
+        <form>
+            {% for i in range(1, 6) %}
+                <label for="tipoProducto{{ i }}">Producto {{ i }}:</label>
+                <select class="tipoProducto" id="tipoProducto{{ i }}" name="tipoProducto{{ i }}">
+                    <option value="none">Ninguno</option>
+                    <option value="fruta">Fruta</option>
+                    <option value="verdura">Verdura</option>
+                </select>
+                <div id="contenedor{{ i }}"></div>
+            {% endfor %}
             
-            <label for="tipoProducto2">Producto 2:</label>
-            <select class="tipoProducto" id="tipoProducto2" name="tipoProducto2">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor2"></div>
-            
-            <label for="tipoProducto3">Producto 3:</label>
-            <select class="tipoProducto" id="tipoProducto3" name="tipoProducto3">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor3"></div>
-            
-            <label for="tipoProducto4">Producto 4:</label>
-            <select class="tipoProducto" id="tipoProducto4" name="tipoProducto4">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor4"></div>
-            
-            <label for="tipoProducto5">Producto 5:</label>
-            <select class="tipoProducto" id="tipoProducto5" name="tipoProducto5">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor5"></div>
-    
             <label for="descripcion">Descripción:</label>
             <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
-        
-            <label for="foto1">Foto 1:</label>
-            <div class="input-container">
-                <input type="file" id="foto1" name="foto1" accept="image/*">
-            </div>
-            
-            <label for="foto2">Foto 2:</label>
-            <div class="input-container">
-                <input type="file" id="foto2" name="foto2" accept="image/*">
-            </div>
-            
-            <label for="foto3">Foto 3:</label>
-            <div class="input-container">
-                <input type="file" id="foto3" name="foto3" accept="image/*">
-            </div>
-            
 
+            {% for i in range(1, 4) %}
+            <label for="foto{{ i }}">Foto {{ i }}:</label>
+            <div class="input-container">
+                <input type="file" id="foto{{i}}" name="foto{{i}}" accept="image/*">
+            </div> 
+    
+            <div id="contenedor{{ i }}"></div>
+            {% endfor %}
+        
             <label for="region">Región:</label>
             <select id="region" name="region">
                 <option value="none">Seleccionar</option>
