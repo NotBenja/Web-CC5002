@@ -1,6 +1,6 @@
 # Ejercicio 3
 
-**Nombre**: [tu nombre va aqui]
+**Nombre**: Benjamín Reyes Bravo
 
 ---
 ## Observaciones
@@ -18,6 +18,9 @@ A pesar de ser una de las vulnerabilidades más recurrentes en aplicaciones web,
 
 **Respuesta**:
 
+Un SSTI es un ataque que consiste en ingresar un input de usuario malicioso, el cual está compuesto por código escrito en la sintaxis del motor de plantillas que utiliza la aplicación web. Es decir, se concatena el input del usuario directamente a la plantilla y luego se envía esta información al servidor que maneja la aplicación. De esta forma, los atacantes pueden manipular el motor de plantillas de manera que puedan tomar el control total del servidor. Este tipo de inyecciones es mucho más peligroso que las demás, pues a causa de lo anterior, los atacantes pueden llegar a tener el control total del servidor back-end y usarlo para seguir atacando al resto de la aplicación.
+
+Fuente: https://portswigger.net/web-security/server-side-template-injection 
 
 ## Pregunta 2
 
@@ -76,16 +79,31 @@ El objetivo de esta pregunta es que usted rellene los bloques de la template `ru
 {% block title %}Ruta{% endblock %}
 
 {% block css %}
-    <!-- PROGRAME AQUI! -->
+<!-- Enlazamos el archivo css -->
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='css/styles.css')}}">
 {% endblock %}
 
 {% block content %}
     <h1>RUTA!</h1>
-    <!-- PROGRAME AQUI! -->
+    <!-- Revisamos si existe la variable num -->
+      {% if num %}
+        <!-- Iteramos según el valor de num -->
+        {% for i in range(num) %}
+          <img src = "{{ url_for('static', filename='svg/icon.svg')}}"
+               alt = "Logo" >
+        {% endfor %}
+      <!-- En caso de que num no exista retornamos un párrafo-->  
+      {% else %}
+        <p> No se entregó un valor </p>
+      {% endif %}
 {% endblock %}
 
 {% block javascript %}
-    <!-- PROGRAME AQUI! -->
+<!-- Enlazamos el archivo js -->
+  <script lang = 'javascript'
+          src="{{ url_for('static', filename='js/code.js')}}" > 
+  </script>
 {% endblock %}
 ```
 **Hint:** para ubicar archivos use la funcion `url_for` de `Jinja`.
@@ -107,7 +125,7 @@ def exito():
 def malo():
   return "Respondiste mal :("
 
-@app.route('/pregunta', method=('GET', 'POST'))
+@app.route('/pregunta', method=['GET', 'POST'])
 def pregunta():
   return render_template('pregunta.html')
 ```
@@ -134,7 +152,9 @@ Reciba el formulario si el método es `POST`, tome el input, escriba y use la fu
 **Respuesta**:
 ```python
 # IMPORTE LO QUE TENGA QUE IMPORTAR DE FLASK
-from flask import Flask, request, render_template
+
+#Importamos redirect y url_for para poder generar los redireccionamientos
+from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -147,11 +167,31 @@ def malo():
   return "Respondiste mal :o"
 
 def validar_input(mi_input):
-  # VALIDE SU INPUT AQUI
-  pass
+  '''
+Pasamos el input a minúsculas para verificar que no existan variantes como gArfield, GARFIELD, etc.
+  '''
+  if "garfield" in mi_input.lower():
+    return False
+  lenght = len(mi_input)
+  if not (5 <= lenght <= 30):
+    return False
+  if not any(char.isdigit() for char in mi_input)
+   return False
+  #Si pasa todas las validaciones, retornamos True
+  return True
 
 @app.route('/pregunta', method=('GET', 'POST'))
 def pregunta():
-  # COMPLETE AQUI LA LÓGICA DE SU RUTA
-  return render_template('pregunta.html')
-```
+  if method == "POST":
+    #Llamamos al input del usuario con name = 'pregunta'
+    input = request.form.get('pregunta')
+    #Vemos que retorna la validacion
+    if validar_input(input):
+      #Si cumple, entonces redireccionamos a la ruta 'exito'
+      return redirect(url_for('exito'))
+    else:
+      #Si no, entonces a la ruta 'malo'
+      return redirect(url_for('malo'))
+  
+  return render_template('pregunta.html') 
+``` 
