@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <form>
+        <form id="productForm" action="{{url_for('agregar_producto')}}" method="post">
             {% for i in range(1, 6) %}
                 <label for="tipoProducto{{ i }}">Producto {{ i }}:</label>
                 <select class="tipoProducto" id="tipoProducto{{ i }}" name="tipoProducto{{ i }}">
@@ -16,7 +16,7 @@
                 </select>
                 <div id="contenedor{{ i }}"></div>
             {% endfor %}
-            
+
             <label for="descripcion">Descripción:</label>
             <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
 
@@ -25,8 +25,6 @@
             <div class="input-container">
                 <input type="file" id="foto{{i}}" name="foto{{i}}" accept="image/*">
             </div> 
-    
-            <div id="contenedor{{ i }}"></div>
             {% endfor %}
         
             <label for="region">Región:</label>

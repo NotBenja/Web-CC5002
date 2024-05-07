@@ -1,29 +1,7 @@
-import re
 import filetype
-
-def validate_username(value):
-    return value and len(value) > 4
-
-
-def validate_password(value):
-    malas = ["1234", "admin1", "odio a mis Aux >:(2"]
-    return bool(re.search(r"\d", value)) and not value in malas
-
 
 def validate_email(value):
     return "@" in value
-
-
-def validate_login_user(username, password):
-    return validate_username(username) and validate_password(password)
-
-
-def validate_register_user(username, password, email):
-    return validate_username(username) and validate_password(password) and validate_email(email)
-
-
-def validate_conf_text(conf_text):
-    return True
 
 
 def validate_conf_img(conf_img):
@@ -47,6 +25,33 @@ def validate_conf_img(conf_img):
         return False
     return True
 
+# Validaciones a definir
 
-def validate_confession(conf_text, conf_img):
-    return validate_conf_text(conf_text) and validate_conf_img(conf_img)
+def validate_product_type(tiposProducto, productos):
+    return True
+
+def validate_product_description(descripcion):
+    return True
+
+def validate_product_photos(fotos):
+    return True
+
+def validate_product_location(region, comuna):
+    return True
+
+def validate_product_producer(nombre, email, celular):
+    return True
+
+# Aquí se valida todo el formulario
+def validate_add_product(tipoProducto, producto, descripcion, fotos, region, comuna, nombre, email, celular):
+    if not validate_product_type(tipoProducto, producto):
+        return False
+    if not validate_product_description(descripcion):
+        return False
+    if not validate_product_photos(fotos):
+        return False
+    if not validate_product_location(region, comuna):
+        return False
+    if not validate_product_producer(nombre, email, celular):
+        return False
+    return True

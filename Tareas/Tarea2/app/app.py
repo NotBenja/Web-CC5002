@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, redirect, url_for, session
-from utils.validations import validate_login_user, validate_register_user, validate_confession
+from utils.validations import validate_add_product
 from db import db
 from werkzeug.utils import secure_filename
 import hashlib
@@ -16,7 +16,35 @@ def index():
 @app.route('/agregar-producto', methods=['GET', 'POST'])
 def agregar_producto():
     if request.method == 'POST':
-        # Hacer validaciones aquí
+        # Obtenemos los productos con sus tipos
+        tiposProducto = []
+        productos = []
+        for i in range(1,6):
+            tipo = request.form.get(f'tipoProducto{i}')
+            producto = request.form.get(f'producto{i}')
+            if tipo and producto:
+                tiposProducto.append(tipo)
+                productos.append(producto)
+        # Obtenemos las fotos del formulario
+        fotos = []
+        for i in range(1,4):
+            foto = request.files.get(f'foto{i}')
+            if foto:
+                fotos.append(foto)
+        # Obtenemos los datos restantes del formulario
+        descripcion = request.form.get('descripcion')
+        region = request.form.get('region')
+        comuna = request.form.get('comuna')
+        nombre = request.form.get('nombre')
+        email = request.form.get('email')
+        celular = request.form.get('celular')
+        # Validamos los datos
+        if not validate_add_product(tiposProducto, producto, descripcion, fotos, region, comuna, nombre, email, celular):
+            return redirect(url_for("agregar_producto"))
+        # Si los datos son validos los enviamos a la base de datos
+
+        # Guardar fotos en carpeta uploads de static
+        
         # Agregar producto a la base de datos aquí
         return redirect(url_for("index"))
     elif request.method == 'GET':

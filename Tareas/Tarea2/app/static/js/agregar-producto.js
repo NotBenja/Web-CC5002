@@ -127,8 +127,10 @@ region.addEventListener("change", () => {
 
 
 //Creador de listas para frutas/verduras
-const crearLista = (tipoProducto) => {
+
+const crearLista = (tipoProducto, i) => {
   let lista = document.createElement("select");
+  lista.name = "producto" + (i + 1);
   if (tipoProducto == "fruta") {
       for (let i = 0; i < frutas.length; i++) {
           const nuevoElemento = document.createElement("option");
@@ -159,7 +161,7 @@ tipoProductos.forEach((producto, index) => {
       if(producto.value == "none"){
         return
       }
-      let lista = crearLista(producto.value);
+      let lista = crearLista(producto.value, index);
       contenedor.appendChild(lista);
   })
 })
