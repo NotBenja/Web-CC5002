@@ -6,6 +6,7 @@
 
 {% block content %}
     <div class="container">
+        <h2>Agregar Producto</h2>
         <form id="productForm" action="{{url_for('agregar_producto')}}" method="post" enctype="multipart/form-data">
             {% for i in range(1, 6) %}
                 <label for="tipoProducto{{ i }}">Producto {{ i }}:</label>

@@ -1,8 +1,12 @@
 import filetype
+import re
 
-def validate_email(value):
-    return "@" in value
-
+def validate_email(email):
+    email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if re.match(email_regex, email):
+        return True
+    else:
+        return False
 
 def validate_foto(foto):
     ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
@@ -25,10 +29,25 @@ def validate_foto(foto):
         return False
     return True
 
-# Validaciones a definir
+def validate_numero(numero):
+    # En caso de haber un número, debe cumplir con la sintaxis correcta
+    if numero is not None and numero.strip() != "":
+        num = numero.strip()
+        validez = bool(re.match(r'^\+569\d{8}$', num))
+        return validez
+    else:
+        return True
+def validate_nombre(nombre):
+    lenght = len(nombre)
+    return (3 <= lenght <= 80)
 
-def validate_product_type(tiposProducto, productos):
-    return True
+def validate_products(tipo_productos):
+    productos = 0
+    for tipo in tipo_productos:
+        if tipo != "none":
+            productos += 1
+
+    return productos > 0
 
 def validate_product_description(descripcion):
     return True
@@ -43,11 +62,17 @@ def validate_product_location(region, comuna):
     return True
 
 def validate_product_producer(nombre, email, celular):
+    if not validate_nombre(nombre):
+        return False
+    if not validate_email(email):
+        return False 
+    if not validate_numero(celular):
+        return False
     return True
 
 # Aquí se valida todo el formulario
 def validate_add_product(tipoProducto, producto, descripcion, fotos, region, comuna, nombre, email, celular):
-    if not validate_product_type(tipoProducto, producto):
+    if not validate_products(tipoProducto):
         return False
     if not validate_product_description(descripcion):
         return False

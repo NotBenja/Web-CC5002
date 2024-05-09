@@ -168,16 +168,14 @@ tipoProductos.forEach((producto, index) => {
 
 //Validaciones
 const validarTipo = (tipoProductos) => {
-  let conteoTiposValidos = 0;
-  const tiposValidos = ["fruta", "verdura"];
+  let productos = 0;
   
   tipoProductos.forEach(function(select) {
-    const tipoSeleccionado = select.value;
-    if(tiposValidos.includes(tipoSeleccionado)){
-      conteoTiposValidos++;
+    if(select.value != "none"){
+      productos++;
     }  
   });
-  return conteoTiposValidos > 0;
+  return productos > 0;
 };
 
 const validarFotos = (fotos) => {
@@ -196,18 +194,10 @@ const validarFotos = (fotos) => {
 
 
 const validarRegion_Comuna = (region, comuna) => {
-  const selectedRegionData = regiones_comunas.regiones.find((n_region) => n_region.region === region);
-  if (selectedRegionData) {
-    if (selectedRegionData.comunas.includes(comuna)) {
-      return true; 
-    } 
-    else {
-      return false;
-    }
-  } 
-  else {
-    return false;
+  if(region == "none" || comuna == "none"){
+    return false
   }
+  return true;
 };
 
 const validarNombre = (nombre) => {
@@ -221,9 +211,14 @@ const validarEmail = (email) => {
 };
 
 const validarNumero = (numero) => {
-  const num = numero.value.trim();
-  const validez = /^\+569\d{8}$/.test(num);
-  return validez;
+  //En caso de haber un número, debe cumplir con la sintaxis correcta
+  if(numero != null && numero.value.trim() != ""){
+    const num = numero.value.trim();
+    const validez = /^\+569\d{8}$/.test(num);
+    return validez;
+  } else {
+    return true
+  }
 };
 
 
