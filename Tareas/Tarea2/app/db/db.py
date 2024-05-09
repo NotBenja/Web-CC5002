@@ -64,10 +64,6 @@ def get_tipos_producto(producto_id):
 def get_fotos_producto(producto_id):
 	"""
     Retorna la ruta del archivo de la foto y el nombre del archivo con el id entregado.
-    
-    :param a: Primer número
-    :param b: Segundo número
-    :return: Suma de a y b
     """
 	conn = get_conn()
 	cursor = conn.cursor()
@@ -104,19 +100,19 @@ def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
 
 	
 #Definimos funciones para registrar productos en la db
-def registrar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor, fotos):
+def registrar_producto(tipoProducto, producto, descripcion, fotos, region, comuna, nombre, email, celular):
 	#Verificamos si el producto ya existe
 	existing_products = get_productos_recientes()
 	for product in existing_products:
-		if product[0] == tipo and product[1] == descripcion and product[2] == comuna_id:
+		if product[0] == tipoProducto and product[1] == descripcion and product[2] == comuna:
 			return False, "El producto ya existe."
 	
 	#En caso de no existir, lo agregamos
-	insertar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor)
+	insertar_producto(tipoProducto, descripcion, comuna, nombre, email, celular)
 	
 	#Obtenemos el id del producto para insertarlo en las demás tablas
 	producto_id = get_ultimo_id_insertado()
-	insertar_producto_verdura_tipo(producto_id, tipo)
+	insertar_producto_verdura_tipo(producto_id, tipoProducto)
 	
 	return True, None
 

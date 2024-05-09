@@ -4,20 +4,20 @@ def validate_email(value):
     return "@" in value
 
 
-def validate_conf_img(conf_img):
+def validate_foto(foto):
     ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
     ALLOWED_MIMETYPES = {"image/jpeg", "image/png", "image/gif"}
 
     # check if a file was submitted
-    if conf_img is None:
+    if foto is None:
         return False
 
     # check if the browser submitted an empty file
-    if conf_img.filename == "":
+    if foto.filename == "":
         return False
     
     # check file extension
-    ftype_guess = filetype.guess(conf_img)
+    ftype_guess = filetype.guess(foto)
     if ftype_guess.extension not in ALLOWED_EXTENSIONS:
         return False
     # check mimetype
@@ -34,6 +34,9 @@ def validate_product_description(descripcion):
     return True
 
 def validate_product_photos(fotos):
+    for foto in fotos:
+        if not validate_foto(foto):
+            return False
     return True
 
 def validate_product_location(region, comuna):

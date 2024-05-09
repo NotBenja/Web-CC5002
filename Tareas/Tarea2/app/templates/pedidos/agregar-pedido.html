@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <h2>Agregar Pedido</h2>
-        <form id="orderForm" action="{{url_for('agregar_pedido')}}" method="post">
+        <form id="orderForm" action="{{url_for('agregar_pedido')}}" method="post" enctype="multipart/form-data">
 
             <label for="tipoProducto1">Producto 1:</label>
             <select class="tipoProducto" id="tipoProducto1" name="tipoProducto1">
