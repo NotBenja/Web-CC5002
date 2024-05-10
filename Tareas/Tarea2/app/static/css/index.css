@@ -105,3 +105,24 @@ ul.menu li a {
 ul.menu li a:hover {
     background-color: rgb(140, 195, 39);
 }
+
+.error-message {
+    border: #721c24 solid 1px;
+    border-radius: 5%;
+    background-color: #f8d7da;
+    color: #721c24;
+    text-align: center;
+    padding: .5em;
+    width: 50%;
+    margin: 0 auto; 
+}
+.confirmation-message {
+    border: blue solid 1px;
+    border-radius: 5%;
+    color: #000000;
+    text-align: center;
+    padding: .8em;
+    width: 20%;
+    margin: 0 auto;
+    background-color: lightblue;
+}

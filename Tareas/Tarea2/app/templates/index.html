@@ -3,6 +3,11 @@
  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 {% endblock %}
 {% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="confirmation-message">{{ messages[0] }}</div>
+  {% endif %}
+{% endwith %}
     <div class="container">
         <h1>Por favor selecciona una opción:</h1>
         <ul class="menu">

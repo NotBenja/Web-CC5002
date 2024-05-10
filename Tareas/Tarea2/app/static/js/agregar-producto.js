@@ -289,7 +289,6 @@ document.getElementById('agregarProducto').addEventListener('click', () => {
 });
 
 document.getElementById('confirmar').addEventListener('click', () => {
-  alert('Hemos recibido el registro de producto. ¡Muchas gracias!');
   document.getElementById('productForm').submit();
 });
 
