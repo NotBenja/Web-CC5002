@@ -8,6 +8,10 @@
     "obtener_tipos_producto": "SELECT TVF.nombre FROM tipo_verdura_fruta TVF, producto_verdura_fruta PVF WHERE TVF.id=PVF.tipo_verdura_fruta_id AND PVF.producto_id=%s",
     "insertar_foto": "INSERT INTO foto (ruta_archivo, nombre_archivo, producto_id) VALUES (%s,%s,%s)",
     "obtener_fotos_producto": "SELECT ruta_archivo, nombre_archivo FROM foto WHERE producto_id=%s",
-    "obtener_ultimo_id_insertado": "SELECT LAST_INSERT_ID()"
+    "obtener_ultimo_id_insertado": "SELECT LAST_INSERT_ID()",
+    "obtener_comunas_por_region": "SELECT id, nombre FROM comuna WHERE region_id=%s",
+    "obtener_regiones": "SELECT id, nombre FROM region",
+    "obtener_frutas": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 1 AND 37",
+    "obtener_verduras": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 38 AND 62"
 }
 

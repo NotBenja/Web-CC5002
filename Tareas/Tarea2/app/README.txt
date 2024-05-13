@@ -9,4 +9,4 @@ pues como las opciones vienen de la base de datos, no es necesario revisar más.
 Validación backend:
 1. Ya que las opciones para seleccionar tipoProducto, producto, región y comuna 
 vienen directamente de la base de datos, entonces sus validaciones serán true siempre.
-2. Como el campo "descripcion" en el formulario es una textArea entonces su validación será true siempre.
+

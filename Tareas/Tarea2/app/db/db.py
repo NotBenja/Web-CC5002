@@ -54,12 +54,32 @@ def get_productos_comuna():
 	products = cursor.fetchall()
 	return products
 
-def get_tipos_producto(producto_id):
+def get_frutas():
 	conn = get_conn()
 	cursor = conn.cursor()
-	cursor.execute(QUERY_DICT["obtener_tipos_producto"], (producto_id,))
-	tipos = cursor.fetchall()
-	return tipos
+	cursor.execute(QUERY_DICT["obtener_frutas"])
+	frutas = cursor.fetchall()
+	return frutas
+def get_verduras():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_verduras"])
+	verduras = cursor.fetchall()
+	return verduras
+
+def get_regiones():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_regiones"])
+	regiones = cursor.fetchall()
+	return regiones
+def get_comunas_por_regionid(region_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_comunas_por_region"], (region_id,))
+	comunas = cursor.fetchall()
+	return comunas
+
 
 def get_fotos_producto(producto_id):
 	"""

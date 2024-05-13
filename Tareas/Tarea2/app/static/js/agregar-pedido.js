@@ -148,17 +148,17 @@ const crearLista = (tipoProducto) => {
 
 
 //EventListener para que cada vez que se seleccione un tipo de producto aparezca/desaparezca la lista respectiva.
-tipoProductos.forEach((producto, index) => {
-  producto.addEventListener("change", () => {
+tipoProductos.forEach((tipo, index) => {
+  tipo.addEventListener("change", () => {
       const contenedorId = 'contenedor' + (index + 1);
       const contenedor = document.getElementById(contenedorId);
       while (contenedor.firstChild) {
         contenedor.removeChild(contenedor.firstChild);
       }
-      if(producto.value == "none"){
+      if(tipo.value == "none"){
         return
       }
-      let lista = crearLista(producto.value);
+      let lista = crearLista(tipo.value);
       contenedor.appendChild(lista);
   })
 })

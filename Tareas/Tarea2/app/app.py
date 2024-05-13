@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, session, flash
+from flask import Flask, request, render_template, redirect, url_for, flash
 from utils.validations import validate_add_product
 from db import db
 from werkzeug.utils import secure_filename
@@ -6,10 +6,12 @@ import hashlib
 import filetype
 import os
 from datetime import datetime
+from PIL import Image
+
 
 UPLOAD_FOLDER = 'static/uploads'
-ORDER_FOLDER = 'pedidos'
 PRODUCT_FOLDER = 'productos'
+sizes = {"/small":(120, 120), "/medium":(640, 480), "/big":(1280, 1024)}
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -72,22 +74,39 @@ def agregar_producto():
             uploadDate = now.strftime("%Y-%m-%d_%H-%M-%S")
             # Definimos el nombre de la foto
             img_filename = f"{_filename}_{uploadDate}_{i}.{_extension}"
-            # Guardamos la foto en la carpeta "productos"
-            foto.save(os.path.join(app.config["UPLOAD_FOLDER"], PRODUCT_FOLDER, img_filename))
+            # Guardamos la foto original en la carpeta "productos"
+            path = os.path.join(app.config["UPLOAD_FOLDER"], 
+                                PRODUCT_FOLDER + "/original", 
+                                img_filename)
+            foto.save(path)
+            # Creamos las otras resoluciones de la foto
+            for folder, size in sizes.items():
+                with Image.open(path) as img:
+                    resized_img = img.resize(size)
+                    new_path = os.path.join(app.config["UPLOAD_FOLDER"], 
+                                            PRODUCT_FOLDER + folder , 
+                                            img_filename)
+                    resized_img.save(new_path)
             i += 1
-
-
         # Agregar producto a la base de datos aquí
+
 
         # Redirigimos a la página principal después de agregar el producto.
         msg = "Producto agregado exitosamente."
         flash(msg)
         return redirect(url_for('index'))
     elif request.method == 'GET':
-        frutas = ""
-        verduras = ""
-        regiones = ""
-        comunas = ""
+        frutas = db.get_frutas()
+        verduras = db.get_verduras()
+        regiones = db.get_regiones()
+        comunas = {}
+        for region in regiones:
+            region_id = region[0]
+            comunas[region_id] = db.get_comunas_por_regionid(region_id)
+            '''
+            Forma de llamar a las comunas de una región
+         
+            '''
         return render_template('productos/agregar-producto.html', frutas = frutas, verduras = verduras, regiones=regiones, comunas=comunas)
     
 @app.route('/ver-productos')
