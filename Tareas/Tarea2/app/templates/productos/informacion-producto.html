@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <div class="product-container">
-        <h1>Información Producto</h1>
+        <h2>Información Producto</h2>
         {% if data %}
             <table>   
                 <tr>
@@ -34,7 +34,7 @@
                 <p> Click en las fotos para verlas en tamaño completo </p>
                 {% for foto in data.fotos %}
                     <div class="foto-container">
-                        <img src="{{ url_for('static', filename= foto) }}" alt="Foto de {{ data.productos }}" />
+                        <img src="{{ url_for('static', filename= foto) }}" alt="Foto de {{ data.productos }}">
                     </div>
                 {% endfor %}
             </div>

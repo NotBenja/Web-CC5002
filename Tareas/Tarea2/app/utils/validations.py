@@ -49,6 +49,9 @@ def validate_products(productos):
     return count > 0
 
 def validate_product_description(descripcion):
+    if descripcion:
+        if len(descripcion) >= 300:
+            return False
     return True
 
 def validate_product_photos(fotos):

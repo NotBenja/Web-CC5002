@@ -10,8 +10,18 @@ const agregarProductoBtn = document.getElementById("agregarProducto");
 const confirmationMessage = document.getElementById("confirmationMessage");
 const confirmarBtn = document.getElementById("confirmar");
 const cancelarBtn = document.getElementById("cancelar");
+const descripcion = document.getElementById("descripcion");
 
 //Validaciones
+
+const validarDescripcion = (descripcion) => {
+  if (descripcion.value.trim() === "") {
+    return true;
+  }
+  const largo = descripcion.value.trim().length;
+  return largo <= 300;
+};
+
 const validarProductos = (productos) => {
   let count = 0;
   productos.forEach(function(select) {
@@ -80,6 +90,11 @@ const handleFormSubmit = () => {
     productos.forEach(function(select) {
       select.style.borderColor = "";
     });
+  }
+  if (!validarDescripcion(descripcion)) {
+    isValid = false;
+    errorMessage += "Por favor, ingresa una descripción de hasta 300 caracteres.\n";
+    descripcion.style.borderColor = "red";
   }
 
   if (!validarFotos(fotos)) {
