@@ -113,6 +113,13 @@ def get_ultimo_id_insertado():
 	last_id = cursor.fetchone()
 	return last_id[0]
 
+def get_datos_producto_por_id(producto_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_datos_producto_por_id"], (producto_id,))
+	datos = cursor.fetchone()
+	conn.close()
+	return datos
 
 
 # Definimos funciones para insertar productos en la db

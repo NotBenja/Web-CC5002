@@ -109,18 +109,18 @@ def agregar_producto():
         return render_template('productos/agregar-producto.html', frutas = frutas, verduras = verduras, regiones=regiones, comunas=comunas)
     
 
-from flask import render_template, request, url_for
+def paginate_productos(page: int, per_page: int) -> list:
+    start_index = (page - 1) * per_page
+    end_index = start_index + per_page
+    return db.get_productos_recientes()[start_index:end_index]
 
 @app.route('/ver-productos', methods=['GET'])
 def ver_productos():
-    # Definimos la paginación para los productos, con un máximo de 5 productos por página
-    PAGE_SIZE = 5
     page = request.args.get('page', 1, type=int)
-    offset = (page - 1) * PAGE_SIZE
-
+    PAGE_SIZE = 5
+    productos_paginados = paginate_productos(page, PAGE_SIZE)
     data = []
-    productos = db.get_productos_recientes_limitado()[offset: offset + PAGE_SIZE]
-    for producto in productos:
+    for producto in productos_paginados:
         # Obtenemos los datos del producto
         producto_id, tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor = producto
         # Cambiamos los textos a un formato mejor
@@ -140,19 +140,22 @@ def ver_productos():
         region_comuna = db.get_nombre_comuna_y_region_por_id_comuna(comuna_id)
         # Obtenemos las fotos del producto
         fotos = db.get_fotos_producto(producto_id)
+        foto_nombre = fotos[0][1]
         foto_producto = f"/uploads/productos/small/{fotos[0][1]}" 
         # Juntamos todos los datos para dejarlos como contexto para la plantilla
         data.append({
+            "id": producto_id,
             "tipo": tipo,
             "nombre": nombre_productor,
             "comuna": region_comuna[0][0],
-            "region": region_comuna[0][1],  
+            "region": region_comuna[0][1],
+            "foto_nombre": foto_nombre, 
             "foto": foto_producto,
-            "productos": detalle_productos[:-2] # Quitamos la coma y el espacio en blanco
+            "productos": detalle_productos[:-2], # Quitamos la coma y el espacio en blanco
         })
 
-    next_url= url_for('ver_productos', page=page + 1) if len(db.get_productos_recientes_limitado()) > offset + PAGE_SIZE else None
-    prev_url= url_for('ver_productos', page=page - 1) if page > 1 else None
+    next_url = url_for('ver_productos', page=page + 1) if len(db.get_productos_recientes()) > page * PAGE_SIZE else None
+    prev_url = url_for('ver_productos', page=page - 1) if page > 1 else None
     return render_template("productos/ver-productos.html", filas=data, next_url=next_url, prev_url=prev_url)
 
 @app.route('/agregar-pedido', methods=['GET', 'POST'])
@@ -171,9 +174,43 @@ def ver_pedidos():
 def informacion_pedido():
     return render_template('pedidos/informacion-pedido.html')
 
-@app.route('/informacion-producto')
+@app.route('/informacion-producto', methods=['GET'])
 def informacion_producto():
-    return render_template('productos/informacion-producto.html')
+    id_producto = request.args.get('id')
+    tipo= request.args.get('tipo')
+    productos = request.args.get('productos')
+    region = request.args.get('region')
+    comuna = request.args.get('comuna')
+    fotos_ = db.get_fotos_producto(id_producto)
+    fotos = []
+    for foto_ in fotos_:
+        if foto_[0] == "productos/medium":
+            foto_ = f"/uploads/{foto_[0]}/{foto_[1]}"
+            print(foto_)
+            fotos.append(foto_)
+    datos_restantes = db.get_datos_producto_por_id(id_producto)
+    nombre = datos_restantes[0]
+    email = datos_restantes[1]
+    celular = datos_restantes[2]
+    if celular == None or celular == "":
+        celular = "No hay celular disponible."
+    descripcion = datos_restantes[3]
+    if descripcion == None or descripcion == "":
+        descripcion = "No hay descripción disponible."
+
+    data = {
+        "id": id_producto,
+        "tipo": tipo,
+        "productos": productos,
+        "region": region,
+        "comuna": comuna,
+        "fotos": fotos,
+        "nombre": nombre,
+        "email": email,
+        "celular": celular,
+        "descripcion": descripcion
+    }
+    return render_template('productos/informacion-producto.html', data=data)
 
 if __name__ == "__main__":
     app.run(debug=True)

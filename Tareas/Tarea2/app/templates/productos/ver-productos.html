@@ -5,6 +5,7 @@ href="{{ url_for('static', filename='css/ver-productos.css') }}">
 {% endblock %}
 {% block content %}
 <div class="products-table">
+<h1>Listado de productos</h1>
 <table id="tablaProductos">
     <tr>
         <th> Tipo</th>
@@ -14,23 +15,48 @@ href="{{ url_for('static', filename='css/ver-productos.css') }}">
         <th> Fotos</th>     
     </tr>
     {% for fila in filas %}
-    <tr>
+    <tr id="{{ fila.id }}">
         <td> {{ fila.tipo }} </td>
         <td> {{ fila.productos }} </td>
         <td> {{ fila.region }} </td>
         <td> {{ fila.comuna }} </td>
-        <td> <img src="{{ url_for('static', filename= fila.foto) }}" alt="Foto Producto"> </td>
+        <td id = "{{ fila.foto_nombre }}"  > <img src="{{ url_for('static', filename= fila.foto) }}" alt="Foto Producto"> </td>
     </tr>
     {% endfor %}
 </table>
 </div>
-{% if prev_url %}
-<a href="{{ prev_url }}">Anterior</a>
-{% endif %}
-{% if next_url %}
-<a href="{{ next_url }}">Siguiente</a>
-{% endif %}
+<div class="pagination">
+    {% if filas %}
+        <p>Página {{ page }}</p>
+        <div class="pagination-buttons">
+            {% if prev_url %}
+            <a href="{{ prev_url }}">Anterior</a>
+            {% endif %}
+
+            {% if next_url %}
+            <a href="{{ next_url }}">Siguiente</a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
 {% endblock content %}
 {% block javascript %}
-    <script lang="javascript" src="{{ url_for('static', filename='js/ver-productos.js') }}"></script>
+    <script>
+    const filas = document.getElementById('tablaProductos').getElementsByTagName('tr');
+
+    for (let i = 0; i < filas.length; i++) {
+        let fila = filas[i];
+        fila.addEventListener('click', function() {
+            let idProducto = this.id;
+            let tipo = this.cells[0].innerText;
+            let productos = this.cells[1].innerText;
+            let region = this.cells[2].innerText;
+            let comuna = this.cells[3].innerText;
+            let foto = this.cells[4].id;
+            window.location.href = '/informacion-producto?id=' + idProducto + '&tipo=' + tipo + 
+            '&productos=' + productos + '&region=' + region + '&comuna=' + comuna + '&foto=' + foto;
+        });
+    }
+    
+    </script>
 {% endblock %}
