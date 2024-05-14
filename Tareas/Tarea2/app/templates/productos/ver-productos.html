@@ -6,39 +6,41 @@ href="{{ url_for('static', filename='css/ver-productos.css') }}">
 {% block content %}
 <div class="products-table">
 <h2>Listado de productos</h2>
-<table id="tablaProductos">
-    <tr>
-        <th> Tipo</th>
-        <th> Producto(s)</th>
-        <th> Región</th>
-        <th> Comuna</th>
-        <th> Fotos</th>     
-    </tr>
-    {% for fila in filas %}
-    <tr id="{{ fila.id }}">
-        <td> {{ fila.tipo }} </td>
-        <td> {{ fila.productos }} </td>
-        <td> {{ fila.region }} </td>
-        <td> {{ fila.comuna }} </td>
-        <td id = "{{ fila.foto_nombre }}"  > <img src="{{ url_for('static', filename= fila.foto) }}" alt="Foto Producto"> </td>
-    </tr>
-    {% endfor %}
-</table>
-</div>
-<div class="pagination">
-    {% if filas %}
-        <p>Página {{ page }}</p>
-        <div class="pagination-buttons">
-            {% if prev_url %}
-            <a href="{{ prev_url }}">Anterior</a>
-            {% endif %}
+{% if filas %}
+    <table id="tablaProductos">
+        <tr>
+            <th> Tipo</th>
+            <th> Producto(s)</th>
+            <th> Región</th>
+            <th> Comuna</th>
+            <th> Fotos</th>     
+        </tr>
+        {% for fila in filas %}
+        <tr id="{{ fila.id }}">
+            <td> {{ fila.tipo }} </td>
+            <td> {{ fila.productos }} </td>
+            <td> {{ fila.region }} </td>
+            <td> {{ fila.comuna }} </td>
+            <td id = "{{ fila.foto_nombre }}"  > <img src="{{ url_for('static', filename= fila.foto) }}" alt="Foto Producto"> </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+    <p>Página {{ page }}</p>
+    <div class="pagination-buttons">
+        {% if prev_url %}
+        <a href="{{ prev_url }}">Anterior</a>
+        {% endif %}
 
-            {% if next_url %}
-            <a href="{{ next_url }}">Siguiente</a>
-            {% endif %}
-        </div>
-    {% endif %}
-</div>
+        {% if next_url %}
+        <a href="{{ next_url }}">Siguiente</a>
+        {% endif %}
+    </div>
+    </div>
+{% else %}
+    <p>Aún no hay datos registrados.</p>
+{% endif %}       
+</div> 
 {% endblock content %}
 {% block javascript %}
     <script>

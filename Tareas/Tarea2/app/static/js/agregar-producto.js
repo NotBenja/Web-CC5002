@@ -95,6 +95,8 @@ const handleFormSubmit = () => {
     isValid = false;
     errorMessage += "Por favor, ingresa una descripción de hasta 300 caracteres.\n";
     descripcion.style.borderColor = "red";
+  } else {
+    descripcion.style.borderColor = "";
   }
 
   if (!validarFotos(fotos)) {

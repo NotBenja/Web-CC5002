@@ -1,3 +1,6 @@
+*La carpeta extras dentro del .zip contiene los archivos sql entregados por el equipo docente
+y algunas fotos para testear la insercion de fotos en la base de datos.
+
 Decisiones de diseño:
 
 -Validación frontend:
