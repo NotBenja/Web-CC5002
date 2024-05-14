@@ -26,6 +26,15 @@ def get_conn():
 # Traspasamos las querys del archivo sentencias.sql a funciones
 
 # Definimos getters del listado de productos existentes en la db
+def get_tipos_producto(producto_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	query = "SELECT TVF.nombre FROM tipo_verdura_fruta TVF, producto_verdura_fruta PVF WHERE TVF.id=PVF.tipo_verdura_fruta_id AND PVF.producto_id=%s"
+	cursor.execute(query, (producto_id,))
+	result = cursor.fetchall()
+	conn.close()
+	return result
+
 def get_productos_recientes():
 	conn = get_conn()
 	cursor = conn.cursor()
@@ -80,6 +89,12 @@ def get_comunas_por_regionid(region_id):
 	comunas = cursor.fetchall()
 	return comunas
 
+def get_nombre_comuna_y_region_por_id_comuna(comuna_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    cursor.execute(QUERY_DICT["obtener_nombre_comuna_y_region_por_id_comuna"], (comuna_id,))
+    nombres = cursor.fetchall()
+    return nombres
 
 def get_fotos_producto(producto_id):
 	"""
@@ -97,6 +112,8 @@ def get_ultimo_id_insertado():
 	cursor.execute(QUERY_DICT["obtener_ultimo_id_insertado"])
 	last_id = cursor.fetchone()
 	return last_id[0]
+
+
 
 # Definimos funciones para insertar productos en la db
 def insertar_producto(tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor):
@@ -120,21 +137,20 @@ def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
 
 	
 #Definimos funciones para registrar productos en la db
-def registrar_producto(tipoProducto, producto, descripcion, fotos, region, comuna, nombre, email, celular):
-	#Verificamos si el producto ya existe
-	existing_products = get_productos_recientes()
-	for product in existing_products:
-		if product[0] == tipoProducto and product[1] == descripcion and product[2] == comuna:
-			return False, "El producto ya existe."
-	
-	#En caso de no existir, lo agregamos
-	insertar_producto(tipoProducto, descripcion, comuna, nombre, email, celular)
-	
+def registrar_producto(tipoProducto, productos, descripcion, comuna, nombre, email, celular):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["insertar_producto"], 
+				   (tipoProducto, descripcion, comuna, nombre, email, celular))
 	#Obtenemos el id del producto para insertarlo en las demás tablas
-	producto_id = get_ultimo_id_insertado()
-	insertar_producto_verdura_tipo(producto_id, tipoProducto)
-	
-	return True, None
+	cursor.execute(QUERY_DICT["obtener_ultimo_id_insertado"])
+	last_id = cursor.fetchone()
+	producto_id = last_id[0]
+	for producto in productos:
+		if producto.isdigit():
+			producto = int(producto)
+			cursor.execute(QUERY_DICT["insertar_producto_verdura_tipo"], (producto_id, producto))
+	conn.commit()      
+	return True, None, producto_id
 
-#def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
-# Esta función quiero que construyas
+

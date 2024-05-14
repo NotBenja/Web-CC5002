@@ -41,13 +41,12 @@ def validate_nombre(nombre):
     lenght = len(nombre)
     return (3 <= lenght <= 80)
 
-def validate_products(tipo_productos):
-    productos = 0
-    for tipo in tipo_productos:
-        if tipo != "none":
-            productos += 1
-
-    return productos > 0
+def validate_products(productos):
+    count = 0
+    for producto in productos:
+        if producto != "none":
+            count += 1
+    return count > 0
 
 def validate_product_description(descripcion):
     return True
@@ -71,8 +70,10 @@ def validate_product_producer(nombre, email, celular):
     return True
 
 # Aquí se valida todo el formulario
-def validate_add_product(tipoProducto, producto, descripcion, fotos, region, comuna, nombre, email, celular):
-    if not validate_products(tipoProducto):
+def validate_add_product(tipoProducto, productos, descripcion, fotos, region, comuna, nombre, email, celular):
+    if tipoProducto == "none":
+        return False
+    if not validate_products(productos):
         return False
     if not validate_product_description(descripcion):
         return False

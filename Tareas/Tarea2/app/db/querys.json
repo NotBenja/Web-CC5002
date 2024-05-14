@@ -12,6 +12,7 @@
     "obtener_comunas_por_region": "SELECT id, nombre FROM comuna WHERE region_id=%s",
     "obtener_regiones": "SELECT id, nombre FROM region",
     "obtener_frutas": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 1 AND 37",
-    "obtener_verduras": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 38 AND 62"
+    "obtener_verduras": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 38 AND 62",
+    "obtener_nombre_comuna_y_region_por_id_comuna": "SELECT COM.nombre AS nombre_comuna, REG.nombre AS nombre_region FROM comuna COM INNER JOIN region REG ON COM.region_id = REG.id WHERE COM.id = %s"
 }
 

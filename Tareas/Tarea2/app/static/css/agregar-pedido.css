@@ -51,3 +51,6 @@ button:hover {
 .confirmation button {
     margin-right: 10px;
 }
+.error {
+    border-color: red;
+  }

@@ -11,16 +11,14 @@
         <div class="error-message">{{ error }}</div>
         {% endif %}
         <form id="productForm" action="{{url_for('agregar_producto')}}" method="post" enctype="multipart/form-data">
-            {% for i in range(1, 6) %}
-                <label for="tipoProducto{{ i }}">Producto {{ i }}:</label>
-                <select class="tipoProducto" id="tipoProducto{{ i }}" name="tipoProducto{{ i }}">
-                    <option value="none">Ninguno</option>
-                    <option value="fruta">Fruta</option>
-                    <option value="verdura">Verdura</option>
-                </select>
-                <div id="contenedor{{ i }}"> 
-                </div>
-            {% endfor %}
+            <label for="tipoProducto"> Tipo de producto(s):</label>
+            <select class="tipoProducto" id="tipoProducto" name="tipoProducto">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor"> 
+            </div>
 
             <label for="descripcion">Descripción:</label>
             <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
@@ -73,56 +71,73 @@
     //Creador de listas para frutas/verduras
     const crearLista = (tipoProducto, i) => {
     let lista = document.createElement("select");
-    lista.name = "producto" + (i + 1);
+    lista.name = "Producto" + (i + 1);
+    lista.className = "productos";
     if (tipoProducto == "fruta") {
         for (let i = 0; i < lista_frutas.length; i++) {
+            if (i == 0){
+                let opcion = document.createElement("option");
+                opcion.value = "none";
+                opcion.text = "Seleccionar";
+                lista.appendChild(opcion);
+            }
             let fruta;
             if (typeof lista_frutas[i] === 'string') {
                 const partes = lista_frutas[i].split(",");
                 fruta = partes[1];
             } else {
                 fruta = lista_frutas[i][1];
+                id_fruta = lista_frutas[i][0];
             }
             const nuevoElemento = document.createElement("option");
-            nuevoElemento.value = fruta;
+            nuevoElemento.value = id_fruta;
             nuevoElemento.text = fruta;
             lista.appendChild(nuevoElemento);
         }
     } else if (tipoProducto == "verdura") {
         for (let i = 0; i < lista_verduras.length; i++) {
+            if (i == 0){
+                let opcion = document.createElement("option");
+                opcion.value = "none";
+                opcion.text = "Seleccionar";
+                lista.appendChild(opcion);
+            }
             let verdura;
             if (typeof lista_verduras[i] === 'string') {
                 const partes = lista_verduras[i].split(",");
                 verdura = partes[1];
             } else {
                 verdura = lista_verduras[i][1];
+                id_verdura = lista_verduras[i][0];
             }
             const nuevoElemento = document.createElement("option");
-            nuevoElemento.value = verdura;
+            nuevoElemento.value = id_verdura;
             nuevoElemento.text = verdura;
             lista.appendChild(nuevoElemento);
         }
     }
     return lista;
     };
-
     //EventListener para que cada vez que se seleccione un tipo de producto aparezca/desaparezca la lista respectiva.
-    const tipoProductos = document.querySelectorAll(".tipoProducto");
-    tipoProductos.forEach((producto, index) => {
-        producto.addEventListener("change", () => {
-            const contenedorId = 'contenedor' + (index + 1);
+    const tipoProductos = document.getElementById("tipoProducto");
+    let tipoActual = tipoProductos.value;
+    tipoProductos.addEventListener("change", () => {
+            const contenedorId = 'contenedor' ;
             const contenedor = document.getElementById(contenedorId);
             while (contenedor.firstChild) {
                 contenedor.removeChild(contenedor.firstChild);
             }
-            if (producto.value == "none") {
+            if (tipoProductos.value == "none") {
                 return;
             }
-            let lista = crearLista(producto.value, index);
-            contenedor.appendChild(lista);
+            for (let i = 0; i < 5; i++) {
+                let label = document.createElement("label");
+                label.textContent = `Producto ${i+1}`;
+                contenedor.appendChild(label);
+                let lista = crearLista(tipoProductos.value, i);
+                contenedor.appendChild(lista);
+            }
         });
-    });
-    
     //Agregamos las regiones y comunas
     const dicc_comunas = {{ comunas|tojson|safe }};
     const selected_region = document.getElementById("region");

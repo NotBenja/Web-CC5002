@@ -13,43 +13,23 @@ href="{{ url_for('static', filename='css/ver-productos.css') }}">
         <th> Comuna</th>
         <th> Fotos</th>     
     </tr>
+    {% for fila in filas %}
     <tr>
-        <td> Verdura </td>
-        <td> Apio</td>
-        <td> Región Metropolitana </td>
-        <td> Providencia </td>
-        <td> <img src="../../media/small/apio_small.png" alt="Foto Producto"> </td>
+        <td> {{ fila.tipo }} </td>
+        <td> {{ fila.productos }} </td>
+        <td> {{ fila.region }} </td>
+        <td> {{ fila.comuna }} </td>
+        <td> <img src="{{ url_for('static', filename= fila.foto) }}" alt="Foto Producto"> </td>
     </tr>
-    <tr>
-        <td> Verdura </td>
-        <td> Tomate</td>
-        <td> Región Metropolitana </td>
-        <td> Providencia </td>
-        <td> <img src="../../media/small/tomate_small.png" alt="Foto Producto"> </td>
-    </tr>
-    <tr>
-        <td> Verdura </td>
-        <td> Lechuga</td>
-        <td> Región Metropolitana </td>
-        <td> Providencia </td>
-        <td> <img src="../../media/small/lechuga_small.png" alt="Foto Producto"> </td>
-    </tr>
-    <tr>
-        <td> Fruta </td>
-        <td> Manzana</td>
-        <td> Región Metropolitana </td>
-        <td> Providencia </td>
-        <td> <img src="../../media/small/manzana_small.png" alt="Foto Producto"> </td>
-    </tr>
-    <tr>
-        <td> Fruta </td>
-        <td> Durazno</td>
-        <td> Región Metropolitana </td>
-        <td> Providencia </td>
-        <td> <img src="../../media/small/durazno_small.png" alt="Foto Producto"> </td>
-    </tr>
+    {% endfor %}
 </table>
 </div>
+{% if prev_url %}
+<a href="{{ prev_url }}">Anterior</a>
+{% endif %}
+{% if next_url %}
+<a href="{{ next_url }}">Siguiente</a>
+{% endif %}
 {% endblock content %}
 {% block javascript %}
     <script lang="javascript" src="{{ url_for('static', filename='js/ver-productos.js') }}"></script>

@@ -16,6 +16,9 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.error {
+    border-color: red;
+  }
 
 form {
     margin-top: 20px;
@@ -64,3 +67,4 @@ button:hover {
 .confirmation button {
     margin-right: 10px;
 }
+

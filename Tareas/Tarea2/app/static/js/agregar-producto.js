@@ -1,6 +1,5 @@
 //Llamamos a los elementos que requieren validación:
-let tipos = document.querySelectorAll('.tipoProducto');
-let producto = document.getElementById("producto");
+let tipo = document.getElementById('tipoProducto');
 let region = document.getElementById("region");
 let comuna = document.getElementById("comuna");
 const fotos = document.querySelectorAll('input[type="file"]');
@@ -13,15 +12,14 @@ const confirmarBtn = document.getElementById("confirmar");
 const cancelarBtn = document.getElementById("cancelar");
 
 //Validaciones
-const validarTipo = (tipoProductos) => {
-  let productos = 0;
-  
-  tipoProductos.forEach(function(select) {
+const validarProductos = (productos) => {
+  let count = 0;
+  productos.forEach(function(select) {
     if(select.value != "none"){
-      productos++;
+      count++;
     }  
   });
-  return productos > 0;
+  return count > 0;
 };
 
 const validarFotos = (fotos) => {
@@ -71,14 +69,15 @@ const validarNumero = (numero) => {
 const handleFormSubmit = () => {
   let isValid = true;
   let errorMessage = "";
-  if (!validarTipo(tipos)) {
+  let productos = document.querySelectorAll(".productos");
+  if (!validarProductos(productos)) {
     isValid = false;
     errorMessage += "Por favor, ingresa al menos un producto.\n";
-    tipos.forEach(function(select) {
+    productos.forEach(function(select) {
       select.style.borderColor = "red";
     });
   } else {
-    tipos.forEach(function(select) {
+    productos.forEach(function(select) {
       select.style.borderColor = "";
     });
   }
