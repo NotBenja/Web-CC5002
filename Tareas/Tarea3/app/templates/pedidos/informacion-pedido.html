@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion-pedido.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <h1>Información Pedido</h1>
+        <table>
+            <tr>
+                <th> Tipo</th>
+                <th> Producto(s)</th>
+                <th> Región</th>
+                <th> Comuna</th>
+                <th> Nombre Comprador</th>  
+            </tr>
+            <tr>
+                <td> Fruta, Verdura </td>
+                <td> Durazno, Apio, Lechuga </td>
+                <td> Región Metropolitana </td>
+                <td> Providencia </td>
+                <td> Juan Pérez </td>
+            </tr>
+        </table>
+    </div>
+{% endblock content %}
+
+

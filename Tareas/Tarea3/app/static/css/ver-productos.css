@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e8ddc9;
+}
+.products-table {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+.products-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.products-table th, 
+.products-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.products-table th {
+    background-color: #a1cc84;
+}
+
+.products-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.products-table img {
+    width: 120px; 
+    height: 120px; 
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.products-table td {
+    cursor: pointer;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto; 
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    border-radius: 10px; 
+}
+
+.pagination a {
+    margin: 0 10px;
+    padding: 5px 10px;
+    border: 1px solid #000000;
+    text-decoration: none;
+    color: #333;
+    border-radius: 5px; 
+}
+.pagination p {
+    margin: 0 10px;
+    line-height: 30px;
+}
+
+.pagination a:hover {
+    background-color: #ababab;
+}
+.pagination-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+}

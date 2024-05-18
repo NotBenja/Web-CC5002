@@ -1,0 +1,55 @@
+{%extends 'base.html'%}
+{% block css %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
+{% endblock %}
+{% block content %}
+        <div class="order-table">
+            <table id="tablaPedidos">
+                <tr>
+                    <th> Tipo</th>
+                    <th> Pedido</th>
+                    <th> Región</th>
+                    <th> Comuna</th>
+                    <th> Nombre comprador</th>     
+                </tr>
+                <tr>
+                    <td> Fruta, Verdura </td>
+                    <td> Durazno, Apio, Lechuga </td>
+                    <td> Región Metropolitana </td>
+                    <td> Providencia </td>
+                    <td> Juan Pérez </td>
+                </tr>
+                <tr>
+                    <td> Verdura </td>
+                    <td> Tomate, Brócoli</td>
+                    <td> Región Metropolitana </td>
+                    <td> Lo Prado </td>
+                    <td> Claudio López </td>
+                </tr>
+                <tr>
+                    <td> Fruta, Verdura </td>
+                    <td> Lechuga, Rábano, Alcachofa, Pomelo, Cereza</td>                    
+                    <td> Región Metropolitana </td>
+                    <td> Santiago Centro </td>
+                    <td> Jorge San Martín </td>
+                </tr>
+                <tr>
+                    <td> Fruta </td>
+                    <td> Papaya, Uva, Pistacho, Nuez</td>                    
+                    <td> Región Metropolitana </td>
+                    <td> Recoleta </td>
+                    <td> Luis Castillo </td>
+                </tr>
+                <tr>
+                    <td> Fruta </td>
+                    <td> Pera</td>
+                    <td> Región Metropolitana </td>
+                    <td> Independencia </td>
+                    <td> Miguel Errázuriz </td>
+                </tr>
+            </table>
+        </div>
+{% endblock content %}
+{% block javascript %}
+    <script src="{{ url_for('static', filename='js/ver-pedidos.js') }}"></script>
+{% endblock %}

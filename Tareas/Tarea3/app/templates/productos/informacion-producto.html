@@ -1,0 +1,65 @@
+{%extends 'base.html'%}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion-producto.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="product-container">
+        <h2>Información Producto</h2>
+        {% if data %}
+            <table>   
+                <tr>
+                    <th> Tipo</th>
+                    <th> Producto(s)</th>
+                    <th> Descripción</th>
+                    <th> Región</th>
+                    <th> Comuna</th>
+                    <th> Nombre Productor</th>
+                    <th> Email Productor</th>
+                    <th> Teléfono Productor</th>
+                     
+                </tr>
+                <tr>
+                    <td> {{data.tipo}} </td>
+                    <td> {{data.productos}} </td>
+                    <td> {{data.descripcion}} </td>
+                    <td> {{data.region}} </td>
+                    <td> {{data.comuna}} </td>
+                    <td> {{data.nombre}} </td>
+                    <td> {{data.email}} </td>
+                    <td> {{data.celular}} </td>
+                </tr>
+            </table>
+            <div class="fotos">
+                <h2>Fotos:</h2>
+                <p> Click en las fotos para verlas en tamaño completo </p>
+                {% for foto in data.fotos %}
+                    <div class="foto-container">
+                        <img src="{{ url_for('static', filename= foto) }}" alt="Foto de {{ data.productos }}">
+                    </div>
+                {% endfor %}
+            </div>
+    </div>    
+
+    
+        {% endif %}
+        
+{% endblock content %}
+{% block javascript %}
+<script>
+    let images = document.querySelectorAll('.fotos img');
+    images.forEach(function(img) {
+        img.addEventListener('click', function() {
+            let originalFilename = '/medium/' +'{{ data.foto }}';
+            let newFilename = '/big/' + '{{ data.foto}}';
+
+            if (img.src.includes(originalFilename)) {
+                img.src = img.src.replace(originalFilename, newFilename);
+            } else {
+                img.src = img.src.replace(newFilename, originalFilename);
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+
