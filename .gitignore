@@ -1,2 +1,4 @@
 # Ignorar la carpeta "web"
 Tareas/Tarea2/web/
+/Tareas/Tarea2/app/static/uploads
+*.png
