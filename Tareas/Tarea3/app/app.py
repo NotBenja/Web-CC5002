@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 from utils.validations import validate_add_product
+from utils.validations import validate_add_order
 from db import db
 from werkzeug.utils import secure_filename
 import hashlib
@@ -162,12 +163,53 @@ def ver_productos():
         prev_url = url_for('ver_productos', page=page - 1) if page > 1 else None
         return render_template("productos/ver-productos.html", filas=data, next_url=next_url, prev_url=prev_url, page=page)
 
+
+
 @app.route('/agregar-pedido', methods=['GET', 'POST'])
 def agregar_pedido():
+    frutas = db.get_frutas()
+    verduras = db.get_verduras()
+    regiones = db.get_regiones()
+    comunas = {}
+    for region in regiones:
+        region_id = region[0]
+        comunas[region_id] = db.get_comunas_por_regionid(region_id)
+    # Si el método es POST, se envia el formulario
     if request.method == 'POST':
-        return redirect(url_for("index"))
+        # Definimos una variable para los mensajes de errores
+        error = ""
+        # Obtenemos los productos con su tipo
+        tipoPedido = request.form.get(f'tipoPedido')
+        pedidos = []
+        for i in range(1,6):
+            pedido = request.form.get(f'Pedido{i}')
+            if pedido != "none" and pedido.strip() != "" and pedido not in pedidos:
+                pedidos.append(pedido)
+
+        # Obtenemos los datos restantes del formulario
+        descripcion = request.form.get('Descripcion')
+        region = request.form.get('region')
+        comuna = request.form.get('comuna')
+        nombre = request.form.get('nombreComprador')
+        email = request.form.get('emailComprador')
+        celular = request.form.get('celularComprador')
+
+        # Validamos los datos
+        if not validate_add_order(tipoPedido, pedidos, descripcion, region, comuna, nombre, email, celular):
+            error += "Uno de los datos entregados no es válido."
+            # Si los datos no son válidos, redirigimos a la página de agregar producto con el mensaje de error
+            return render_template('productos/agregar-producto.html', error=error, frutas = frutas, verduras = verduras, regiones=regiones, comunas=comunas)
+        # Agregar producto a la base de datos aquí
+        db.registrar_pedido(tipoPedido, pedidos, descripcion, comuna, nombre, email, celular)
+        # Redirigimos a la página principal después de agregar el producto.
+        msg = "Pedido agregado exitosamente."
+        flash(msg)
+        return redirect(url_for('index'))
+    # Si el método es GET, mostramos el formulario para agregar un producto
     elif request.method == 'GET':
-        return render_template('pedidos/agregar-pedido.html')
+        return render_template('pedidos/agregar-pedido.html', frutas = frutas, verduras = verduras, regiones=regiones, comunas=comunas)
+
+
 
 @app.route('/ver-pedidos', methods=['GET'])
 def ver_pedidos():
@@ -175,10 +217,15 @@ def ver_pedidos():
     # Lógica para ver los pedidos
         return render_template('pedidos/ver-pedidos.html')
 
+
+
+
 @app.route('/informacion-pedido', methods=['GET'])
 def informacion_pedido():
     if request.method == 'GET':
         return render_template('pedidos/informacion-pedido.html')
+    
+
 
 @app.route('/informacion-producto', methods=['GET'])
 def informacion_producto():

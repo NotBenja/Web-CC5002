@@ -1,67 +1,42 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/agregar-pedido.css') }}">
 {% endblock %}
+
 {% block content %}
     <div class="container">
         <h2>Agregar Pedido</h2>
+        {% if error %}
+        <div class="error-message">{{ error }}</div>
+        {% endif %}
         <form id="orderForm" action="{{url_for('agregar_pedido')}}" method="post" enctype="multipart/form-data">
+            <label for="tipoPedido"> Tipo de Pedido(s):</label>
+            <select class="tipoPedido" id="tipoPedido" name="tipoPedido">
+                <option value="none">Ninguno</option>
+                <option value="fruta">Fruta</option>
+                <option value="verdura">Verdura</option>
+            </select>
+            <div id="contenedor"> 
+            </div>
 
-            <label for="tipoProducto1">Producto 1:</label>
-            <select class="tipoProducto" id="tipoProducto1" name="tipoProducto1">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor1"></div>
-
-            
-            <label for="tipoProducto2">Producto 2:</label>
-            <select class="tipoProducto" id="tipoProducto2" name="tipoProducto2">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor2"></div>
-            
-            <label for="tipoProducto3">Producto 3:</label>
-            <select class="tipoProducto" id="tipoProducto3" name="tipoProducto3">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor3"></div>
-            
-            <label for="tipoProducto4">Producto 4:</label>
-            <select class="tipoProducto" id="tipoProducto4" name="tipoProducto4">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor4"></div>
-            
-            <label for="tipoProducto5">Producto 5:</label>
-            <select class="tipoProducto" id="tipoProducto5" name="tipoProducto5">
-                <option value="none">Ninguno</option>
-                <option value="fruta">Fruta</option>
-                <option value="verdura">Verdura</option>
-            </select>
-            <div id="contenedor5"></div>
-    
             <label for="descripcion">Descripción:</label>
-            <textarea name="Descripcion" id="descripcion" cols="50" rows="4"></textarea>
-            
+            <textarea name="Descripcion" id="descripcion" cols="50" rows="4" placeholder="Max. 300 caracteres"></textarea>
+        
             <label for="region">Región:</label>
             <select id="region" name="region">
                 <option value="none">Seleccionar</option>
+                {% for region in regiones %}
+                    <option value="{{ region[0] }}">{{ region[1] }}</option>
+                {% endfor %}
             </select>
 
             <label for="comuna">Comuna:</label>
             <select id="comuna" name="comuna">
-                <option value="none">Seleccionar</option>
+                <option value="none">Seleccionar región</option>
             </select>
 
-            <label for="nombreComprador">Nombre Comprador:</label>
+            <label for="nombreProductor">Nombre Comprador:</label>
             <input type="text" id="nombreComprador" name="nombreComprador" minlength="3" maxlength="80" placeholder="Ej: Juan Pérez">
 
             <label for="emailComprador">Email Comprador:</label>
@@ -81,5 +56,110 @@
     </div>
 {% endblock %}
 {% block javascript %}
-    <script src="{{ url_for('static', filename='js/agregar-pedido.js') }}"></script>
+    <script>
+    //Listas de frutas y verduras
+    const lista_frutas = {{frutas|tojson|safe}};
+    const lista_verduras = {{verduras|tojson|safe}};
+
+    //Creador de listas para frutas/verduras
+    const crearLista = (tipoPedido, i) => {
+    let lista = document.createElement("select");
+    lista.name = "Pedido" + (i + 1);
+    lista.className = "pedidos";
+    if (tipoPedido == "fruta") {
+        for (let i = 0; i < lista_frutas.length; i++) {
+            if (i == 0){
+                let opcion = document.createElement("option");
+                opcion.value = "none";
+                opcion.text = "Seleccionar";
+                lista.appendChild(opcion);
+            }
+            let fruta;
+            if (typeof lista_frutas[i] === 'string') {
+                const partes = lista_frutas[i].split(",");
+                fruta = partes[1];
+            } else {
+                fruta = lista_frutas[i][1];
+                id_fruta = lista_frutas[i][0];
+            }
+            const nuevoElemento = document.createElement("option");
+            nuevoElemento.value = id_fruta;
+            nuevoElemento.text = fruta;
+            lista.appendChild(nuevoElemento);
+        }
+    } else if (tipoPedido == "verdura") {
+        for (let i = 0; i < lista_verduras.length; i++) {
+            if (i == 0){
+                let opcion = document.createElement("option");
+                opcion.value = "none";
+                opcion.text = "Seleccionar";
+                lista.appendChild(opcion);
+            }
+            let verdura;
+            if (typeof lista_verduras[i] === 'string') {
+                const partes = lista_verduras[i].split(",");
+                verdura = partes[1];
+            } else {
+                verdura = lista_verduras[i][1];
+                id_verdura = lista_verduras[i][0];
+            }
+            const nuevoElemento = document.createElement("option");
+            nuevoElemento.value = id_verdura;
+            nuevoElemento.text = verdura;
+            lista.appendChild(nuevoElemento);
+        }
+    }
+    return lista;
+    };
+    //EventListener para que cada vez que se seleccione un tipo de pedido aparezca/desaparezca la lista respectiva.
+    const tipoPedidos = document.getElementById("tipoPedido");
+    let tipoActual = tipoPedidos.value;
+    tipoPedidos.addEventListener("change", () => {
+            const contenedorId = 'contenedor' ;
+            const contenedor = document.getElementById(contenedorId);
+            while (contenedor.firstChild) {
+                contenedor.removeChild(contenedor.firstChild);
+            }
+            if (tipoPedidos.value == "none") {
+                return;
+            }
+            for (let i = 0; i < 5; i++) {
+                let label = document.createElement("label");
+                label.textContent = `Pedido ${i+1}`;
+                contenedor.appendChild(label);
+                let lista = crearLista(tipoPedidos.value, i);
+                contenedor.appendChild(lista);
+            }
+        });
+    //Agregamos las regiones y comunas
+    const dicc_comunas = {{ comunas|tojson|safe }};
+    const selected_region = document.getElementById("region");
+    const selected_comuna = document.getElementById("comuna");
+
+    //EventListener para cambiar la lista de comunas según la región seleccionada
+    selected_region.addEventListener("change", () => {
+        while (selected_comuna.firstChild) {
+            selected_comuna.removeChild(comuna.firstChild);
+        }
+        const selectedRegionId = selected_region.value;
+        if(selectedRegionId == "none") {
+            let opcion = document.createElement("option");
+            opcion.value = "none";
+            opcion.text = "Seleccionar";
+            selected_comuna.appendChild(opcion);
+            return;
+        }
+        const selectedRegionComunas = dicc_comunas[selectedRegionId];
+        if (selectedRegionComunas) {
+            selectedRegionComunas.forEach((n_comuna) => {
+                let nuevaComuna = document.createElement("option");
+                nuevaComuna.value = n_comuna[0];
+                nuevaComuna.text = n_comuna[1];
+                comuna.appendChild(nuevaComuna);
+            });
+        }
+    });
+
+</script>
+<script src="{{ url_for('static', filename='js/agregar-pedido.js') }}" defer></script>
 {% endblock %}

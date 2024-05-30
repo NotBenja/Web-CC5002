@@ -160,4 +160,18 @@ def registrar_producto(tipoProducto, productos, descripcion, comuna, nombre, ema
 	conn.commit()      
 	return True, None, producto_id
 
-
+def registrar_pedido(tipoPedido, pedidos, descripcion, comuna, nombre, email, celular):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["insertar_pedido"], 
+				   (tipoPedido, descripcion, comuna, nombre, email, celular))
+	#Obtenemos el id del producto para insertarlo en las demás tablas
+	cursor.execute(QUERY_DICT["obtener_ultimo_id_insertado"])
+	last_id = cursor.fetchone()
+	pedido_id = last_id[0]
+	for pedido in pedidos:
+		if pedido.isdigit():
+			pedido = int(pedido)
+			cursor.execute(QUERY_DICT["insertar_pedido_verdura_tipo"], (pedido_id, pedido))
+	conn.commit()      
+	return True, None

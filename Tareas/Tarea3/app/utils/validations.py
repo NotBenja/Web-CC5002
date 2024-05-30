@@ -72,7 +72,7 @@ def validate_product_producer(nombre, email, celular):
         return False
     return True
 
-# Aquí se valida todo el formulario
+# Aquí se valida todo el formulario de los productos
 def validate_add_product(tipoProducto, productos, descripcion, fotos, region, comuna, nombre, email, celular):
     if tipoProducto == "none":
         return False
@@ -81,6 +81,20 @@ def validate_add_product(tipoProducto, productos, descripcion, fotos, region, co
     if not validate_product_description(descripcion):
         return False
     if not validate_product_photos(fotos):
+        return False
+    if not validate_product_location(region, comuna):
+        return False
+    if not validate_product_producer(nombre, email, celular):
+        return False
+    return True
+
+# Reciclamos las funciones anteriores para validar el formulario de los pedidos
+def validate_add_order(tipoProducto, productos, descripcion, region, comuna, nombre, email, celular):
+    if tipoProducto == "none":
+        return False
+    if not validate_products(productos):
+        return False
+    if not validate_product_description(descripcion):
         return False
     if not validate_product_location(region, comuna):
         return False
