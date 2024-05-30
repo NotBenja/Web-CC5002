@@ -2,6 +2,9 @@
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion-producto.css') }}">
 {% endblock %}
+{% block extras_navbar %}
+    <a class="navbar-page" href="{{ url_for('ver_productos') }}">Listado Productos</a>
+{% endblock %}
 {% block content %}
     <div class="product-container">
         <h2>Información Producto</h2>

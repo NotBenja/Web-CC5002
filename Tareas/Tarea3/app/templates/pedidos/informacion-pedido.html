@@ -2,6 +2,9 @@
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/informacion-pedido.css') }}">
 {% endblock %}
+{% block extras_navbar %}
+    <a class="navbar-page" href="{{ url_for('ver_pedidos') }}">Listado Pedidos</a>
+{% endblock %}
 {% block content %}
     <div class="order-container">
         <h2>Información Pedido</h2>

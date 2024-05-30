@@ -15,7 +15,7 @@ body {
 
 .navbar {
     display: flex;
-    justify-content: start;
+    justify-content: flex-end;
     align-items: center;
     background: var(--green-color);
     border: .2em solid var(--black-color);
@@ -25,6 +25,9 @@ body {
     box-shadow: .3em .3em 0px 0px rgba(0, 0, 0, 0.1);
 }
 
+.navbar div {
+    margin-left: auto;
+}
 .navbar > * {
     color: var(--black-color);
     font-family: var(--font-family);
@@ -53,8 +56,7 @@ body {
 
 .navbar a {
     text-decoration: none;
-    margin: 0 1em;
-    margin-left: auto; 
+    margin-left: auto;
     padding: .25em;
     font-weight: 600;
     font-size: 1.2rem;

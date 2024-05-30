@@ -12,7 +12,8 @@ href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
             <th> Tipo</th>
             <th> Pedido</th>
             <th> Región</th>
-            <th> Comuna</th>    
+            <th> Comuna</th>
+            <th> Nombre Comprador</th>    
         </tr>
         {% for fila in filas %}
         <tr id="{{ fila.id }}">
@@ -20,6 +21,7 @@ href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
             <td> {{ fila.productos }} </td>
             <td> {{ fila.region }} </td>
             <td> {{ fila.comuna }} </td>
+            <td> {{ fila.nombre }} </td>
         </tr>
         {% endfor %}
     </table>

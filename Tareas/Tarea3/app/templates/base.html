@@ -16,7 +16,10 @@
         src="{{ url_for('static', filename='svg/fruit-basket-icon.svg') }}" 
         alt="Logo">
         <h1>FrutiVerde Online</h1>
-        <a class="navbar-page" href="{{ url_for('index') }}">Inicio</a>
+        <div>
+            <a class="navbar-page" href="{{ url_for('index') }}">Inicio</a>
+            {% block extras_navbar %} {% endblock %}
+        </div>
     </div>
 <section class="main-container">
     {% block content %}{% endblock %}   
