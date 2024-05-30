@@ -35,12 +35,29 @@ def get_tipos_producto(producto_id):
 	conn.close()
 	return result
 
+def get_tipos_pedido(pedido_id):
+    conn = get_conn()
+    cursor = conn.cursor()
+    query = "SELECT TVF.nombre FROM tipo_verdura_fruta TVF, pedido_verdura_fruta PVF WHERE TVF.id=PVF.tipo_verdura_fruta_id AND PVF.pedido_id=%s"
+    cursor.execute(query, (pedido_id,))
+    result = cursor.fetchall()
+    conn.close()
+    return result
+
 def get_productos_recientes():
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_productos_recientes"])
 	products = cursor.fetchall()
 	return products
+
+def get_pedidos_recientes():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_pedidos_recientes"])
+	pedidos = cursor.fetchall()
+	return pedidos
+
 
 def get_productos_recientes_limitado():
 	conn = get_conn()
@@ -117,6 +134,14 @@ def get_datos_producto_por_id(producto_id):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_datos_producto_por_id"], (producto_id,))
+	datos = cursor.fetchone()
+	conn.close()
+	return datos
+
+def get_datos_pedido_por_id(pedido_id):
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_datos_pedido_por_id"], (pedido_id,))
 	datos = cursor.fetchone()
 	conn.close()
 	return datos

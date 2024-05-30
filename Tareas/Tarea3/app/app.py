@@ -209,13 +209,51 @@ def agregar_pedido():
     elif request.method == 'GET':
         return render_template('pedidos/agregar-pedido.html', frutas = frutas, verduras = verduras, regiones=regiones, comunas=comunas)
 
+# Función para paginar los pedidos con un tamaño de página y un número de página
+def paginate_pedidos(page: int, per_page: int) -> list:
+    start_index = (page - 1) * per_page
+    end_index = start_index + per_page
+    return db.get_pedidos_recientes()[start_index:end_index]
 
 
 @app.route('/ver-pedidos', methods=['GET'])
 def ver_pedidos():
     if request.method == 'GET':
-    # Lógica para ver los pedidos
-        return render_template('pedidos/ver-pedidos.html')
+        page = request.args.get('page', 1, type=int)
+        PAGE_SIZE = 5
+        pedidos_paginados = paginate_pedidos(page, PAGE_SIZE)
+        data = []
+        for pedido in pedidos_paginados:
+            # Obtenemos los datos del pedido
+            pedido_id, tipo, descripcion, comuna_id, nombre_comprador, email_comprador, celular_comprador = pedido
+            # Cambiamos los textos a un formato mejor
+            if tipo == "fruta":
+                tipo = "Fruta"
+            elif tipo == "verdura":
+                tipo = "Verdura"
+            # Vemos los productos que anotó el comprador
+            pedidos_query = db.get_tipos_pedido(pedido_id)
+            pedidos_query = [pedido[0] for pedido in pedidos_query]
+            
+            detalle_pedidos = ""
+            for pedido in pedidos_query:
+                detalle_pedidos += pedido + ", "
+
+            # Obtenemos el nombre de la región y la comuna
+            region_comuna = db.get_nombre_comuna_y_region_por_id_comuna(comuna_id)
+            # Juntamos todos los datos para dejarlos como contexto para la plantilla
+            data.append({
+                "id": pedido_id,
+                "tipo": tipo,
+                "nombre": nombre_comprador,
+                "comuna": region_comuna[0][0],
+                "region": region_comuna[0][1],
+                "productos": detalle_pedidos[:-2], # Quitamos la coma y el espacio en blanco
+            })
+
+        next_url = url_for('ver_pedidos', page=page + 1) if len(db.get_pedidos_recientes()) > page * PAGE_SIZE else None
+        prev_url = url_for('ver_pedidos', page=page - 1) if page > 1 else None
+        return render_template("pedidos/ver-pedidos.html", filas=data, next_url=next_url, prev_url=prev_url, page=page)
 
 
 
@@ -223,7 +261,35 @@ def ver_pedidos():
 @app.route('/informacion-pedido', methods=['GET'])
 def informacion_pedido():
     if request.method == 'GET':
-        return render_template('pedidos/informacion-pedido.html')
+        # Llamamos a los argumentos entregados en la url
+        id_pedido = request.args.get('id')
+        tipo= request.args.get('tipo')
+        pedidos = request.args.get('pedidos')
+        region = request.args.get('region')
+        comuna = request.args.get('comuna')
+        datos_restantes = db.get_datos_pedido_por_id(id_pedido)
+        nombre = datos_restantes[0]
+        email = datos_restantes[1]
+        celular = datos_restantes[2]
+        # Si hay algun dato faltante, se reemplaza por uno predeterminado
+        if celular == None or celular == "":
+            celular = "No hay celular disponible."
+        descripcion = datos_restantes[3]
+        if descripcion == None or descripcion == "":
+            descripcion = "No hay descripción disponible."
+        # Hacemos un diccionario con los datos para el contexto
+        data = {
+            "id": id_pedido,
+            "tipo": tipo,
+            "pedidos": pedidos,
+            "region": region,
+            "comuna": comuna,
+            "nombre": nombre,
+            "email": email,
+            "celular": celular,
+            "descripcion": descripcion
+        }
+        return render_template('pedidos/informacion-pedido.html', data=data)
     
 
 

@@ -1,55 +1,61 @@
 {%extends 'base.html'%}
 {% block css %}
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
+<link rel="stylesheet" 
+href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
 {% endblock %}
 {% block content %}
-        <div class="order-table">
-            <table id="tablaPedidos">
-                <tr>
-                    <th> Tipo</th>
-                    <th> Pedido</th>
-                    <th> Región</th>
-                    <th> Comuna</th>
-                    <th> Nombre comprador</th>     
-                </tr>
-                <tr>
-                    <td> Fruta, Verdura </td>
-                    <td> Durazno, Apio, Lechuga </td>
-                    <td> Región Metropolitana </td>
-                    <td> Providencia </td>
-                    <td> Juan Pérez </td>
-                </tr>
-                <tr>
-                    <td> Verdura </td>
-                    <td> Tomate, Brócoli</td>
-                    <td> Región Metropolitana </td>
-                    <td> Lo Prado </td>
-                    <td> Claudio López </td>
-                </tr>
-                <tr>
-                    <td> Fruta, Verdura </td>
-                    <td> Lechuga, Rábano, Alcachofa, Pomelo, Cereza</td>                    
-                    <td> Región Metropolitana </td>
-                    <td> Santiago Centro </td>
-                    <td> Jorge San Martín </td>
-                </tr>
-                <tr>
-                    <td> Fruta </td>
-                    <td> Papaya, Uva, Pistacho, Nuez</td>                    
-                    <td> Región Metropolitana </td>
-                    <td> Recoleta </td>
-                    <td> Luis Castillo </td>
-                </tr>
-                <tr>
-                    <td> Fruta </td>
-                    <td> Pera</td>
-                    <td> Región Metropolitana </td>
-                    <td> Independencia </td>
-                    <td> Miguel Errázuriz </td>
-                </tr>
-            </table>
-        </div>
+<div class="order-table">
+<h2>Listado de pedidos</h2>
+{% if filas %}
+    <table id="tablaPedidos">
+        <tr>
+            <th> Tipo</th>
+            <th> Pedido</th>
+            <th> Región</th>
+            <th> Comuna</th>    
+        </tr>
+        {% for fila in filas %}
+        <tr id="{{ fila.id }}">
+            <td> {{ fila.tipo }} </td>
+            <td> {{ fila.productos }} </td>
+            <td> {{ fila.region }} </td>
+            <td> {{ fila.comuna }} </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div class="pagination">
+    <p>Página {{ page }}</p>
+    <div class="pagination-buttons">
+        {% if prev_url %}
+        <a href="{{ prev_url }}">Anterior</a>
+        {% endif %}
+
+        {% if next_url %}
+        <a href="{{ next_url }}">Siguiente</a>
+        {% endif %}
+    </div>
+    </div>
+{% else %}
+    <p>Aún no hay datos registrados.</p>
+{% endif %}       
+</div> 
 {% endblock content %}
 {% block javascript %}
-    <script src="{{ url_for('static', filename='js/ver-pedidos.js') }}"></script>
+    <script>
+    const filas = document.getElementById('tablaPedidos').getElementsByTagName('tr');
+
+    for (let i = 0; i < filas.length; i++) {
+        let fila = filas[i];
+        fila.addEventListener('click', function() {
+            let idPedido = this.id;
+            let tipo = this.cells[0].innerText;
+            let pedidos = this.cells[1].innerText;
+            let region = this.cells[2].innerText;
+            let comuna = this.cells[3].innerText;
+            window.location.href = '/informacion-pedido?id=' + idPedido + '&tipo=' + tipo + 
+            '&pedidos=' + pedidos + '&region=' + region + '&comuna=' + comuna;
+        });
+    }
+    
+    </script>
 {% endblock %}

@@ -2,6 +2,7 @@
     "insertar_producto": "INSERT INTO producto (tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor) VALUES (%s,%s,%s,%s,%s,%s);",
     "insertar_pedido": "INSERT INTO pedido (tipo, descripcion, comuna_id, nombre_comprador, email_comprador, celular_comprador) VALUES (%s,%s,%s,%s,%s,%s);",
     "obtener_productos_recientes": "SELECT id, tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor FROM producto ORDER BY id DESC",
+    "obtener_pedidos_recientes": "SELECT id, tipo, descripcion, comuna_id, nombre_comprador, email_comprador, celular_comprador FROM pedido ORDER BY id DESC",
     "obtener_productos_recientes_limitado": "SELECT id, tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor FROM producto ORDER BY id DESC LIMIT 0, 5",
     "obtener_productos_siguientes": "SELECT id, tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor FROM producto ORDER BY id DESC LIMIT 5, 5",
     "obtener_productos_comuna": "SELECT PRO.id, PRO.tipo, PRO.descripcion, COM.nombre, PRO.nombre_productor, PRO.email_productor, PRO.celular_productor FROM producto PRO, comuna COM WHERE PRO.comuna_id = COM.id ORDER BY id DESC LIMIT 5, 5",
@@ -16,6 +17,7 @@
     "obtener_frutas": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 1 AND 37",
     "obtener_verduras": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 38 AND 62",
     "obtener_nombre_comuna_y_region_por_id_comuna": "SELECT COM.nombre AS nombre_comuna, REG.nombre AS nombre_region FROM comuna COM INNER JOIN region REG ON COM.region_id = REG.id WHERE COM.id = %s",
-    "obtener_datos_producto_por_id": "SELECT nombre_productor, email_productor, celular_productor, descripcion FROM producto WHERE id = %s"
+    "obtener_datos_producto_por_id": "SELECT nombre_productor, email_productor, celular_productor, descripcion FROM producto WHERE id = %s",
+    "obtener_datos_pedido_por_id": "SELECT nombre_comprador, email_comprador, celular_comprador, descripcion FROM pedido WHERE id = %s"
 }
 
