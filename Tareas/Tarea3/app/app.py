@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, session, jsonify, flash
 from utils.validations import validate_add_product
 from utils.validations import validate_add_order
 from db import db
@@ -8,6 +8,8 @@ import filetype
 import os
 from datetime import datetime
 from PIL import Image
+from flask_cors import cross_origin
+
 
 
 UPLOAD_FOLDER = 'static/uploads'
@@ -333,6 +335,29 @@ def informacion_producto():
             "descripcion": descripcion
         }
         return render_template('productos/informacion-producto.html', data=data)
+
+@app.route("/grafico-productos", methods=["GET"])
+def grafico_productos():
+    return render_template("graficos/grafico-productos.html")
+
+@app.route("/grafico-pedidos", methods=["GET"])
+def grafico_pedidos():
+    return render_template("graficos/grafico-pedidos.html")
+
+
+@app.route("/get-datos-productos", methods=["GET"])
+@cross_origin(origin="localhost", supports_credentials=True)
+def get_datos_productos():
+    random_data = db.get_productos_recientes()
+    return jsonify(random_data)
+
+
+@app.route("/get-datos-pedidos", methods=["GET"])
+@cross_origin(origin="localhost", supports_credentials=True)
+def get_datos_pedidos():
+    random_data = db.get_pedidos_recientes()
+    return jsonify(random_data)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
