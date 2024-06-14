@@ -9,12 +9,10 @@
   {% endif %}
 {% endwith %}
     <div class="container">
-        <h2>¡Bienvenido! ¿Qué deseas realizar?</h2>
+        <h2> Selecciona el gráfico que desees 🌿</h2>
         <ul class="menu">
-            <li><a href="{{ url_for('agregar_producto') }}">Agregar producto</a></li>
-            <li><a href="{{ url_for('ver_productos') }}">Ver productos</a></li>
-            <li><a href="{{ url_for('agregar_pedido') }}">Agregar pedido</a></li>
-            <li><a href="{{ url_for('ver_pedidos') }}">Ver pedidos</a></li>
+            <li><a href="{{ url_for('grafico_productos') }}"> Productos por Fruta/Verdura </a></li>
+            <li><a href="{{ url_for('grafico_pedidos') }}"> Pedidos por Comuna </a></li>
         </ul>
     </div>
 {% endblock %}

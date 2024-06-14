@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/graficos.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2 class="title">Gráfico de productos</h2>    
+<div class="stats-container">
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+            Gráfico que muestra la cantidad de productos registrados por tipo.
+        </p>
+    </figure>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="{{url_for('static', filename='js/grafico-productos.js')}}"></script>
+{% endblock %}

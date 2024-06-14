@@ -47,6 +47,9 @@ href="{{ url_for('static', filename='css/ver-productos.css') }}">
     const filas = document.getElementById('tablaProductos').getElementsByTagName('tr');
 
     for (let i = 0; i < filas.length; i++) {
+        if (i === 0) {
+            continue;
+        }
         let fila = filas[i];
         fila.addEventListener('click', function() {
             let idProducto = this.id;
@@ -55,7 +58,7 @@ href="{{ url_for('static', filename='css/ver-productos.css') }}">
             let region = this.cells[2].innerText;
             let comuna = this.cells[3].innerText;
             let foto = this.cells[4].id;
-            window.location.href = '/informacion-producto?id=' + idProducto + '&tipo=' + tipo + 
+            window.location.href = '/ver-productos/informacion-producto?id=' + idProducto + '&tipo=' + tipo + 
             '&productos=' + productos + '&region=' + region + '&comuna=' + comuna + '&foto=' + foto;
         });
     }

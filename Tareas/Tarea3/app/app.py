@@ -260,7 +260,7 @@ def ver_pedidos():
 
 
 
-@app.route('/informacion-pedido', methods=['GET'])
+@app.route('/ver-pedidos/informacion-pedido', methods=['GET'])
 def informacion_pedido():
     if request.method == 'GET':
         # Llamamos a los argumentos entregados en la url
@@ -295,7 +295,7 @@ def informacion_pedido():
     
 
 
-@app.route('/informacion-producto', methods=['GET'])
+@app.route('/ver-productos/informacion-producto', methods=['GET'])
 def informacion_producto():
     if request.method == 'GET':
         # Llamamos a los argumentos entregados en la url
@@ -336,27 +336,33 @@ def informacion_producto():
         }
         return render_template('productos/informacion-producto.html', data=data)
 
-@app.route("/grafico-productos", methods=["GET"])
-def grafico_productos():
-    return render_template("graficos/grafico-productos.html")
 
-@app.route("/grafico-pedidos", methods=["GET"])
+@app.route('/stats', methods=['GET'])
+def stats():
+    if request.method == 'GET':
+        return render_template('stats.html')
+
+@app.route("/stats/grafico-productos", methods=["GET"])
+def grafico_productos():
+    return render_template("productos/grafico-productos.html")
+
+@app.route("/stats/grafico-pedidos", methods=["GET"])
 def grafico_pedidos():
-    return render_template("graficos/grafico-pedidos.html")
+    return render_template("pedidos/grafico-pedidos.html")
 
 
 @app.route("/get-datos-productos", methods=["GET"])
 @cross_origin(origin="localhost", supports_credentials=True)
 def get_datos_productos():
-    random_data = db.get_productos_recientes()
-    return jsonify(random_data)
+    data = db.get_cantidad_productos()
+    return jsonify(data)
 
 
 @app.route("/get-datos-pedidos", methods=["GET"])
 @cross_origin(origin="localhost", supports_credentials=True)
 def get_datos_pedidos():
-    random_data = db.get_pedidos_recientes()
-    return jsonify(random_data)
+    data = db.get_cantidad_pedidos_comuna()
+    return jsonify(data)
 
 
 if __name__ == "__main__":

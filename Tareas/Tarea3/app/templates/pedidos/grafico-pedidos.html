@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/graficos.css') }}">
+{% endblock %}
+
+{% block content %}
+<h2 class="title">Gráfico de pedidos por Comuna</h2>    
+<div class="stats-container">
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description">
+            Gráfico que muestra la cantidad de pedidos registrados por Comuna.
+        </p>
+    </figure>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="{{url_for('static', filename='js/grafico-pedidos.js')}}"></script>
+{% endblock %}

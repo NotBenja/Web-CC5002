@@ -18,6 +18,8 @@
     "obtener_verduras": "SELECT id, nombre FROM tipo_verdura_fruta WHERE id BETWEEN 38 AND 62",
     "obtener_nombre_comuna_y_region_por_id_comuna": "SELECT COM.nombre AS nombre_comuna, REG.nombre AS nombre_region FROM comuna COM INNER JOIN region REG ON COM.region_id = REG.id WHERE COM.id = %s",
     "obtener_datos_producto_por_id": "SELECT nombre_productor, email_productor, celular_productor, descripcion FROM producto WHERE id = %s",
-    "obtener_datos_pedido_por_id": "SELECT nombre_comprador, email_comprador, celular_comprador, descripcion FROM pedido WHERE id = %s"
+    "obtener_datos_pedido_por_id": "SELECT nombre_comprador, email_comprador, celular_comprador, descripcion FROM pedido WHERE id = %s",
+    "obtener_cantidad_productos_por_tipo": "select TVF.id, count(*) from producto_verdura_fruta PVF, tipo_verdura_fruta TVF where PVF.tipo_verdura_fruta_id = TVF.id group by TVF.id;",
+    "obtener_cantidad_pedidos_por_comuna": "select CO.nombre, count(*) from pedido PE, comuna CO where PE.comuna_id=CO.id group by PE.comuna_id;"
 }
 

@@ -36,19 +36,20 @@ def get_tipos_producto(producto_id):
 	return result
 
 def get_tipos_pedido(pedido_id):
-    conn = get_conn()
-    cursor = conn.cursor()
-    query = "SELECT TVF.nombre FROM tipo_verdura_fruta TVF, pedido_verdura_fruta PVF WHERE TVF.id=PVF.tipo_verdura_fruta_id AND PVF.pedido_id=%s"
-    cursor.execute(query, (pedido_id,))
-    result = cursor.fetchall()
-    conn.close()
-    return result
+	conn = get_conn()
+	cursor = conn.cursor()
+	query = "SELECT TVF.nombre FROM tipo_verdura_fruta TVF, pedido_verdura_fruta PVF WHERE TVF.id=PVF.tipo_verdura_fruta_id AND PVF.pedido_id=%s"
+	cursor.execute(query, (pedido_id,))
+	result = cursor.fetchall()
+	conn.close()
+	return result
 
 def get_productos_recientes():
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_productos_recientes"])
 	products = cursor.fetchall()
+	conn.close()
 	return products
 
 def get_pedidos_recientes():
@@ -56,6 +57,7 @@ def get_pedidos_recientes():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_pedidos_recientes"])
 	pedidos = cursor.fetchall()
+	conn.close()
 	return pedidos
 
 
@@ -64,6 +66,7 @@ def get_productos_recientes_limitado():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_productos_recientes_limitado"])
 	products = cursor.fetchall()
+	conn.close()
 	return products
 
 def get_productos_siguientes():
@@ -71,6 +74,7 @@ def get_productos_siguientes():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_productos_siguientes"])
 	products = cursor.fetchall()
+	conn.close()
 	return products
 
 def get_productos_comuna():
@@ -78,6 +82,7 @@ def get_productos_comuna():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_productos_comuna"])
 	products = cursor.fetchall()
+	conn.close()
 	return products
 
 def get_frutas():
@@ -85,12 +90,15 @@ def get_frutas():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_frutas"])
 	frutas = cursor.fetchall()
+	conn.close()
 	return frutas
+
 def get_verduras():
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_verduras"])
 	verduras = cursor.fetchall()
+	conn.close()
 	return verduras
 
 def get_regiones():
@@ -98,29 +106,34 @@ def get_regiones():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_regiones"])
 	regiones = cursor.fetchall()
+	conn.close()
 	return regiones
+
 def get_comunas_por_regionid(region_id):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_comunas_por_region"], (region_id,))
 	comunas = cursor.fetchall()
+	conn.close()
 	return comunas
 
 def get_nombre_comuna_y_region_por_id_comuna(comuna_id):
-    conn = get_conn()
-    cursor = conn.cursor()
-    cursor.execute(QUERY_DICT["obtener_nombre_comuna_y_region_por_id_comuna"], (comuna_id,))
-    nombres = cursor.fetchall()
-    return nombres
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_nombre_comuna_y_region_por_id_comuna"], (comuna_id,))
+	nombres = cursor.fetchall()
+	conn.close()
+	return nombres
 
 def get_fotos_producto(producto_id):
 	"""
-    Retorna la ruta del archivo de la foto y el nombre del archivo con el id entregado.
-    """
+	Retorna la ruta del archivo de la foto y el nombre del archivo con el id entregado.
+	"""
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_fotos_producto"], (producto_id,))
 	fotos = cursor.fetchall()
+	conn.close()
 	return fotos
 
 def get_ultimo_id_insertado():
@@ -128,6 +141,7 @@ def get_ultimo_id_insertado():
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["obtener_ultimo_id_insertado"])
 	last_id = cursor.fetchone()
+	conn.close()
 	return last_id[0]
 
 def get_datos_producto_por_id(producto_id):
@@ -153,28 +167,31 @@ def insertar_producto(tipo, descripcion, comuna_id, nombre_productor, email_prod
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["insertar_producto"], (tipo, descripcion, comuna_id, nombre_productor, email_productor, celular_productor))
 	conn.commit()
+	conn.close()
 
 def insertar_producto_verdura_tipo(producto_id, tipo_verdura_fruta_id):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["insertar_producto_verdura_tipo"], (producto_id, tipo_verdura_fruta_id))
 	conn.commit()
+	conn.close()
 
 def insertar_foto(ruta_archivo, nombre_archivo, producto_id):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["insertar_foto"], (ruta_archivo, nombre_archivo, producto_id))
 	conn.commit()
+	conn.close()
 
 
-	
-#Definimos funciones para registrar productos en la db
+
+# Definimos funciones para registrar productos en la db
 def registrar_producto(tipoProducto, productos, descripcion, comuna, nombre, email, celular):
 	conn = get_conn()
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["insertar_producto"], 
 				   (tipoProducto, descripcion, comuna, nombre, email, celular))
-	#Obtenemos el id del producto para insertarlo en las demás tablas
+	# Obtenemos el id del producto para insertarlo en las demás tablas
 	cursor.execute(QUERY_DICT["obtener_ultimo_id_insertado"])
 	last_id = cursor.fetchone()
 	producto_id = last_id[0]
@@ -182,7 +199,8 @@ def registrar_producto(tipoProducto, productos, descripcion, comuna, nombre, ema
 		if producto.isdigit():
 			producto = int(producto)
 			cursor.execute(QUERY_DICT["insertar_producto_verdura_tipo"], (producto_id, producto))
-	conn.commit()      
+	conn.commit()
+	conn.close()
 	return True, None, producto_id
 
 def registrar_pedido(tipoPedido, pedidos, descripcion, comuna, nombre, email, celular):
@@ -190,7 +208,7 @@ def registrar_pedido(tipoPedido, pedidos, descripcion, comuna, nombre, email, ce
 	cursor = conn.cursor()
 	cursor.execute(QUERY_DICT["insertar_pedido"], 
 				   (tipoPedido, descripcion, comuna, nombre, email, celular))
-	#Obtenemos el id del producto para insertarlo en las demás tablas
+	# Obtenemos el id del producto para insertarlo en las demás tablas
 	cursor.execute(QUERY_DICT["obtener_ultimo_id_insertado"])
 	last_id = cursor.fetchone()
 	pedido_id = last_id[0]
@@ -198,5 +216,36 @@ def registrar_pedido(tipoPedido, pedidos, descripcion, comuna, nombre, email, ce
 		if pedido.isdigit():
 			pedido = int(pedido)
 			cursor.execute(QUERY_DICT["insertar_pedido_verdura_tipo"], (pedido_id, pedido))
-	conn.commit()      
+	conn.commit()
+	conn.close()
 	return True, None
+
+
+# Funciones para los graficos
+
+def get_cantidad_productos():
+	frutas = 0
+	verduras = 0
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_cantidad_productos_por_tipo"])
+	producto_cantidad = cursor.fetchall()
+	for producto in producto_cantidad:
+		id_producto = int(producto[0])
+		if id_producto < 38:
+			frutas += producto[1]
+		else:
+			verduras += producto[1]
+	conn.close()
+	return frutas, verduras
+
+def get_cantidad_pedidos_comuna():
+	conn = get_conn()
+	cursor = conn.cursor()
+	cursor.execute(QUERY_DICT["obtener_cantidad_pedidos_por_comuna"])
+	pedido_cantidad = cursor.fetchall()
+	conn.close()
+	comuna_cantidad = {}
+	for pedido in pedido_cantidad:
+		comuna_cantidad[pedido[0]] = pedido[1]
+	return comuna_cantidad

@@ -1,6 +1,6 @@
 :root {
     --black-color: #000022;
-    --background-color: #fce2b0;
+    --background-color: #fce2b0; /* Este color solo se usará si decides usar un color de fondo en lugar de una imagen */
     --white-color: #ffffff;
     --green-color: #8cc327;
     --font-family: 'Roboto', sans-serif;
@@ -10,7 +10,7 @@ body {
     font-family: var(--font-family);
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
+    background-size: cover;
 }
 
 .navbar {
@@ -28,6 +28,7 @@ body {
 .navbar div {
     margin-left: auto;
 }
+
 .navbar > * {
     color: var(--black-color);
     font-family: var(--font-family);
@@ -47,11 +48,12 @@ body {
     margin: 0;
     font-size: 2em;
 }
+
 .navbar a.navbar-page {
-    padding: 10px 20px; 
-    border: 1px solid #ccc; 
-    border-radius: 10px; 
-    text-decoration: none; 
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-decoration: none;
 }
 
 .navbar a {
@@ -60,23 +62,27 @@ body {
     padding: .25em;
     font-weight: 600;
     font-size: 1.2rem;
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
 }
+
 .navbar a:hover {
-    background-color: var(--background-color); 
+    background-color: var(--background-color);
 }
+
 .container {
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9); /* Añade un poco de transparencia para que el fondo se vea detrás */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.container h1{
-    font-family: "Fira Code", monospace;
+.container h2 {
+    font-family: "Roboto", monospace;
     color: var(--black-color);
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 ul.menu {
@@ -91,8 +97,8 @@ ul.menu li {
     margin: 0 10px;
     background-color: var(--background-color);
     border-radius: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
 ul.menu li:hover {
@@ -105,14 +111,14 @@ ul.menu li a {
     color: var(--black-color);
     border: none;
     cursor: pointer;
-    transition: color 0.3s ease; 
-    font-weight: 700; 
-    font-size: 1.2rem;;
-    text-align: center; 
-    text-decoration: none; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    transition: color 0.3s ease;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 ul.menu li a:hover {
@@ -127,7 +133,7 @@ ul.menu li a:hover {
     text-align: center;
     padding: .5em;
     width: 50%;
-    margin: 0 auto; 
+    margin: 0 auto;
 }
 
 .confirmation-message {

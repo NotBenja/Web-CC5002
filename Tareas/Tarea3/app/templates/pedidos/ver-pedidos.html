@@ -47,6 +47,9 @@ href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
     const filas = document.getElementById('tablaPedidos').getElementsByTagName('tr');
 
     for (let i = 0; i < filas.length; i++) {
+        if (i === 0) {
+            continue;
+        }
         let fila = filas[i];
         fila.addEventListener('click', function() {
             let idPedido = this.id;
@@ -54,7 +57,7 @@ href="{{ url_for('static', filename='css/ver-pedidos.css') }}">
             let pedidos = this.cells[1].innerText;
             let region = this.cells[2].innerText;
             let comuna = this.cells[3].innerText;
-            window.location.href = '/informacion-pedido?id=' + idPedido + '&tipo=' + tipo + 
+            window.location.href = '/ver-pedidos/informacion-pedido?id=' + idPedido + '&tipo=' + tipo + 
             '&pedidos=' + pedidos + '&region=' + region + '&comuna=' + comuna;
         });
     }
