@@ -3,6 +3,10 @@ y algunas fotos para testear la insercion de fotos en la base de datos.
 
 Decisiones de diseño:
 
+-Página de estadísticas:
+Para acceder a los gráficos se implementó un botón que dice ¨Estadísticas¨ en la navbar, el cual lleva a una página permite elegir cuál
+gráfico se visualizar.
+
 -Validación frontend:
 1. Como la lista de frutas y verduras solo aparece al momento de seleccionar el tipo de producto,
 en la validación js solo se corrobora que haya al menos un tipo de producto seleccionado.
